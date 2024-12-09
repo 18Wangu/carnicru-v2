@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import { NavLink } from "@/components/NavLink";
 import { daysOneFont, montserratFont } from "@/app/fonts/font";
 import "./globals.css";
+import NavLink from "@/components/NavLink";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -18,30 +18,7 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <body className={`${daysOneFont.className} bg-[#F8F9E9]`}>
-        <nav className="flex relative justify-between items-center px-12 py-9 w-full min-h-[103px] max-md:px-5 max-md:max-w-full">
-          <div className="z-0 self-stretch my-auto text-2xl text-teal-600 uppercase">
-            se connecter {/* par la suite ajouter une variable pour savoir si connecte ou deconnecte */}
-          </div>
-          <div className="flex z-0 gap-10 items-center self-stretch my-auto text-2xl text-emerald-900 uppercase min-w-[240px] max-md:max-w-full">
-            {navLinks.map((link, index) => (
-              <NavLink key={index} label={link} />
-            ))}
-          </div>
-          <div className="flex absolute left-2/4 z-0 gap-6 items-center self-start -translate-x-2/4 bottom-[15px] min-w-[240px] translate-y-[0%]">
-            <img
-              loading="lazy"
-              src="https://cdn.builder.io/api/v1/image/assets/TEMP/15a5ea8544f02d0519e6374b2d581d13c2a1874f565bde5a6a573ccbd9842fc2?placeholderIfAbsent=true&apiKey=dcd0895cf3d542fc8e4c37bdfe462197"
-              alt=""
-              className="object-contain shrink-0 self-stretch my-auto aspect-square w-[73px]"
-            />
-            <img
-              loading="lazy"
-              src="https://cdn.builder.io/api/v1/image/assets/TEMP/268a006053f609cddd8aaa3ee230fe7a03f5ef145957f8ce4d29ee5e7206f458?placeholderIfAbsent=true&apiKey=dcd0895cf3d542fc8e4c37bdfe462197"
-              alt=""
-              className="object-contain shrink-0 self-stretch my-auto aspect-[5.56] w-[150px]"
-            />
-          </div>
-        </nav>
+        <NavLink />
         {children}
       </body>
     </html>

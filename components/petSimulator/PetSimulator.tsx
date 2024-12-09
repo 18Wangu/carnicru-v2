@@ -1,6 +1,6 @@
 import * as React from "react";
-import { NavLink } from "../NavLink";
 import { QuestionCard } from "./components/QuestionCard";
+import { Footer } from "../Footer";
 
 const navLinks = ["mon compte", "FAQ", "panier"];
 const socialLinks = Array(4).fill({ icon: "", href: "#" });
@@ -48,7 +48,7 @@ export default function PetSimulator() {
         </div>
       </main>
 
-      
+      <Footer />
     </div>
   );
 }

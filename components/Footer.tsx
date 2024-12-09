@@ -30,3 +30,7 @@ export function Footer() {
     </footer>
   );
 }
+
+/*
+Modifier pour le rendre responsive
+ */
