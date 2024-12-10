@@ -1,11 +1,11 @@
 "use client";
 
 import * as React from "react";
-import { PlanCard } from "./PlanCard";
-import { PortionDetails } from "./PortionDetails";
-import { SubscriptionPlan } from "./types";
+import { PlanCard } from "../../../components/subscriptionPlans/PlanCard";
+import { PortionDetails } from "../../../components/subscriptionPlans/PortionDetails";
+import { SubscriptionPlan } from "../../../components/subscriptionPlans/types";
 
-export const SubscriptionPlans: React.FC = () => {
+const SubscriptionPlans: React.FC = () => {
   const [selectedPlan, setSelectedPlan] = React.useState<string | null>(null);
 
   const plans: SubscriptionPlan[] = [
@@ -95,3 +95,5 @@ export const SubscriptionPlans: React.FC = () => {
     </div>
   );
 };
+
+export default SubscriptionPlans;

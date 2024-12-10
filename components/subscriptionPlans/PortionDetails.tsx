@@ -19,7 +19,7 @@ export const PortionDetails: React.FC<PortionDetailsProps> = ({
         <div className="flex flex-col items-center pl-5 mt-16 max-w-full text-4xl text-[#B9110F] w-[530px] max-md:mt-10">
           <Image
             loading="lazy"
-            src="gamelle.svg"
+            src="/gamelle.svg"
             alt="Daily portion visualization"
             className="object-contain max-w-full aspect-[1.96]"
             width={313}
