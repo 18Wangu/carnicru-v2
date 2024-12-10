@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { CodePromo } from "@/components/CodePromo";
 
 const Formulaire = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -37,8 +38,8 @@ const Formulaire = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen text-[#F8F9E9] bg-[#F8F9E9]">
-      <div className="bg-[#149A77] rounded-3xl p-24 shadow-lg relative">
+    <div className="flex flex-col items-center justify-center h-[calc(100vh-6.5rem)] text-[#F8F9E9] bg-[#F8F9E9]">
+      <div className="bg-[#149A77] rounded-3xl p-24 shadow-lg relative w-[1000px] h-[600px] flex flex-col justify-center items-center overflow-hidden">
         {/* Étape 1 */}
         {currentStep === 1 && (
           <>
@@ -47,201 +48,184 @@ const Formulaire = () => {
               <Image
                 src="/feuille.svg"
                 alt="feuille"
-                width={300}
-                height={70}
+                width={500}
+                height={500}
                 className="absolute bottom-0 right-0 opacity-75"
               />
             </div>
 
             {/* Contenu principal */}
-            <div className="relative z-10">
-              <h2 className="text-xl font-bold mb-4 text-center">Quelques questions...</h2>
-              <label className="block text-center mb-4">Mon chien s'appelle :</label>
+            <div className="flex flex-col items-center justify-center relative z-10">
+              <h2 className="text-6xl font-bold mb-4 text-center">Quelques questions...</h2>
+              <label className="block text-3xl text-center my-12">Mon chien s'appelle :</label>
               <input
                 type="text"
                 name="nomChien"
                 value={formData.nomChien}
                 onChange={handleInputChange}
                 placeholder="Entrer son nom ici ..."
-                className="w-full p-2 rounded-3xl border-none focus:outline-none text-center text-[#004339]"
+                className="w-auto text-2xl p-2 rounded-3xl border-none focus:outline-none text-center text-[#004339]"
               />
-              <button
-                onClick={goToNextStep}
-                className="bg-[#B0D8C1] text-[#004339] font-bold py-2 px-4 rounded-3xl w-full mt-4"
-              >
-                Suivant
-              </button>
             </div>
+            <button
+              onClick={goToNextStep}
+              className="bg-[#B0D8C1] text-[#004339] font-bold py-2 px-4 rounded-3xl w-auto mt-4 absolute bottom-5 right-5 text-2xl"
+            >
+              Suivant
+            </button>
           </>
         )}
 
         {/* Étape 2 */}
         {currentStep === 2 && (
           <>
-            <h2 className="text-xl font-bold mb-4 text-center">Son sexe :</h2>
-            <div className="flex justify-around mb-6">
+            <h2 className="text-3xl font-bold mb-4 text-center">Son sexe :</h2>
+            <div className="flex flex-col gap-3 text-2xl">
               <button
                 onClick={() => setFormData((prev) => ({ ...prev, sexe: "mâle" }))}
-                className={`py-2 px-4 rounded-3xl font-bold ${
-                  formData.sexe === "mâle" ? "bg-red-700" : "bg-red-500"
-                }`}
+                className={`py-2 px-4 rounded-3xl font-bold bg-[#E30613] focus:outline-none focus:ring-2 focus:ring-[#E30613] focus:ring-offset-2`}
               >
                 Mâle
               </button>
               <button
                 onClick={() => setFormData((prev) => ({ ...prev, sexe: "femelle" }))}
-                className={`py-2 px-4 rounded-3xl font-bold ${
-                  formData.sexe === "femelle" ? "bg-red-700" : "bg-red-500"
-                }`}
+                className={`py-2 px-4 rounded-3xl font-bold bg-[#E30613] focus:outline-none focus:ring-2 focus:ring-[#E30613] focus:ring-offset-2`}
               >
                 Femelle
               </button>
             </div>
-            <div className="flex justify-between">
-              <button
-                onClick={goToPreviousStep}
-                className="bg-[#B0D8C1] text-[#F8F9E9] font-bold py-2 px-4 rounded-3xl"
-              >
-                Précédent
-              </button>
-              <button
-                onClick={goToNextStep}
-                className="bg-[#B0D8C1] text-[#004339] font-bold py-2 px-4 rounded-3xl"
-              >
-                Suivant
-              </button>
+            <div className="flex justify-between">             
             </div>
+            <button
+              onClick={goToPreviousStep}
+              className="bg-[#F8F9E9] text-[#004339] font-bold py-2 px-4 rounded-3xl w-auto absolute bottom-5 left-5 text-2xl"
+            >
+              Précédent
+            </button>
+            <button
+              onClick={goToNextStep}
+              className="bg-[#B0D8C1] text-[#004339] font-bold py-2 px-4 rounded-3xl w-auto absolute bottom-5 right-5 text-2xl"
+            >
+              Suivant
+            </button>
           </>
         )}
 
         {/* Étape 3 */}
         {currentStep === 3 && (
           <>
-            <h2 className="text-xl font-bold mb-4 text-center">Son poids :</h2>
-            <div className="flex justify-center mb-6">
+            <h2 className="text-3xl font-bold mb-4 text-center">Son poids :</h2>
+            <div className="flex justify-center items-center mb-6">
               <input
                 type="number"
                 name="poids"
                 value={formData.poids}
                 onChange={handleInputChange}
                 placeholder="Entrer le poids (kg)"
-                className="text-center text-[#004339] py-2 px-4 rounded-3xl w-[100px]"
+                className="text-center text-[#004339] py-2 px-4 rounded-3xl w-auto"
               />
-              <span className="ml-2 text-lg">kg</span>
+              <span className="ml-2 text-3xl">kg</span>
             </div>
-            <div className="flex justify-between">
-              <button
-                onClick={goToPreviousStep}
-                className="bg-[#B0D8C1] text-[#F8F9E9] font-bold py-2 px-4 rounded-3xl"
-              >
-                Précédent
-              </button>
-              <button
-                onClick={goToNextStep}
-                className="bg-[#B0D8C1] text-[#004339] font-bold py-2 px-4 rounded-3xl"
-              >
-                Suivant
-              </button>
-            </div>
+            <button
+              onClick={goToPreviousStep}
+              className="bg-[#F8F9E9] text-[#004339] font-bold py-2 px-4 rounded-3xl w-auto absolute bottom-5 left-5 text-2xl"
+            >
+              Précédent
+            </button>
+            <button
+              onClick={goToNextStep}
+              className="bg-[#B0D8C1] text-[#004339] font-bold py-2 px-4 rounded-3xl w-auto absolute bottom-5 right-5 text-2xl"
+            >
+              Suivant
+            </button>
           </>
         )}
 
         {/* Étape 4 */}
         {currentStep === 4 && (
           <>
-            <h2 className="text-xl font-bold mb-4 text-center">Niveau d'activité :</h2>
-            <div className="flex justify-around mb-6">
+            <h2 className="text-3xl font-bold mb-4 text-center">Niveau d'activité :</h2>
+            <div className="flex gap-3 text-2xl">
               {["Canapé", "Actif", "Sportif"].map((level) => (
                 <button
                   key={level}
                   onClick={() => setFormData((prev) => ({ ...prev, activite: level }))}
-                  className={`py-2 px-4 rounded-3xl font-bold ${
-                    formData.activite === level ? "bg-red-700" : "bg-red-500"
-                  }`}
+                  className={`py-2 px-4 rounded-3xl font-bold bg-[#E30613] focus:outline-none focus:ring-2 focus:ring-[#E30613] focus:ring-offset-2`}
                 >
                   {level}
                 </button>
               ))}
             </div>
-            <div className="flex justify-between">
-              <button
-                onClick={goToPreviousStep}
-                className="bg-[#B0D8C1] text-[#F8F9E9] font-bold py-2 px-4 rounded-3xl"
-              >
-                Précédent
-              </button>
-              <button
-                onClick={goToNextStep}
-                className="bg-[#B0D8C1] text-[#004339] font-bold py-2 px-4 rounded-3xl"
-              >
-                Suivant
-              </button>
-            </div>
+            <button
+              onClick={goToPreviousStep}
+              className="bg-[#F8F9E9] text-[#004339] font-bold py-2 px-4 rounded-3xl w-auto absolute bottom-5 left-5 text-2xl"
+            >
+              Précédent
+            </button>
+            <button
+              onClick={goToNextStep}
+              className="bg-[#B0D8C1] text-[#004339] font-bold py-2 px-4 rounded-3xl w-auto absolute bottom-5 right-5 text-2xl"
+            >
+              Suivant
+            </button>
           </>
         )}
 
         {/* Étape 5 */}
         {currentStep === 5 && (
           <>
-            <h2 className="text-xl font-bold mb-4 text-center">Corpulence :</h2>
-            <div className="flex justify-around mb-6">
+            <h2 className="text-3xl font-bold mb-4 text-center">Corpulence :</h2>
+            <div className="flex gap-3 text-2xl">
               {["Maigre", "Normal", "Surpoids"].map((type) => (
                 <button
                   key={type}
                   onClick={() => setFormData((prev) => ({ ...prev, corpulence: type }))}
-                  className={`py-2 px-4 rounded-3xl font-bold ${
-                    formData.corpulence === type ? "bg-red-700" : "bg-red-500"
-                  }`}
+                  className={`py-2 px-4 rounded-3xl font-bold bg-[#E30613] focus:outline-none focus:ring-2 focus:ring-[#E30613] focus:ring-offset-2`}
                 >
                   {type}
                 </button>
               ))}
             </div>
-            <div className="flex justify-between">
-              <button
-                onClick={goToPreviousStep}
-                className="bg-[#B0D8C1] text-[#F8F9E9] font-bold py-2 px-4 rounded-lg"
-              >
-                Précédent
-              </button>
-              <button
-                onClick={goToNextStep}
-                className="bg-[#B0D8C1] text-[#004339] font-bold py-2 px-4 rounded-lg"
-              >
-                Suivant
-              </button>
-            </div>
+            <button
+              onClick={goToPreviousStep}
+              className="bg-[#F8F9E9] text-[#004339] font-bold py-2 px-4 rounded-3xl w-auto absolute bottom-5 left-5 text-2xl"
+            >
+              Précédent
+            </button>
+            <button
+              onClick={goToNextStep}
+              className="bg-[#B0D8C1] text-[#004339] font-bold py-2 px-4 rounded-3xl w-auto absolute bottom-5 right-5 text-2xl"
+            >
+              Suivant
+            </button>
           </>
         )}
 
         {/* Étape 6 */}
         {currentStep === 6 && (
           <>
-            <h2 className="text-xl font-bold mb-4 text-center">Résumé des informations :</h2>
-            <ul className="mb-6">
+            <h2 className="text-3xl font-bold mb-4 text-center">Résumé des informations :</h2>
+            <ul className="bg-[#B0D8C1] p-5 rounded-3xl mb-6">
               {Object.entries(formData).map(([key, value]) => (
-                <li key={key} className="mb-2">
-                  <strong>{key} :</strong> {value || "Non renseigné"}
+                <li key={key} className="text-2xl mb-2">
+                  <strong className="text-[#004339]">{key} :</strong> <span className="text-[#149A77]">{value || "Non renseigné"}</span>
                 </li>
               ))}
             </ul>
-            <div className="flex justify-between">
+            <button
+              onClick={goToPreviousStep}
+              className="bg-[#F8F9E9] text-[#004339] font-bold py-2 px-4 rounded-3xl w-auto absolute bottom-5 left-5 text-2xl"
+            >
+              Précédent
+            </button>
+            <Link
+              href="/pages/ResultatPortion">
               <button
-                onClick={goToPreviousStep}
-                className="bg-[#B0D8C1] text-[#F8F9E9] font-bold py-2 px-4 rounded-lg"
+                className="bg-[#E30613] text-[#F8F9E9] font-bold py-2 px-4 rounded-3xl w-auto absolute bottom-5 right-5 text-2xl"
               >
-                Précédent
+                Confirmer
               </button>
-              <Link
-                href="/pages/ResultatPortion">
-                <button
-                  //onClick={handleConfirm}
-                  className="bg-red-500 text-[#F8F9E9] font-bold py-2 px-4 rounded-lg"
-                >
-                  Confirmer
-                </button>
-              </Link>
-            </div>
+            </Link>
           </>
         )}
       </div>
