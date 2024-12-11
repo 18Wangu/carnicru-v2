@@ -12,6 +12,7 @@ const Formulaire = () => {
     poids: "",
     activite: "",
     corpulence: "",
+    sterilise: "",
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -23,7 +24,7 @@ const Formulaire = () => {
   };
 
   const goToNextStep = () => {
-    if (currentStep < 6) setCurrentStep(currentStep + 1);
+    if (currentStep < 7) setCurrentStep(currentStep + 1);
   };
 
   const goToPreviousStep = () => {
@@ -197,6 +198,39 @@ const Formulaire = () => {
         {/* Étape 6 */}
         {currentStep === 6 && (
           <>
+            <h2 className="text-3xl font-bold mb-4 text-center">Votre chien est-il stérilisé ?</h2>
+            <div className="flex gap-3 text-2xl">
+              <button
+                onClick={() => setFormData((prev) => ({ ...prev, sterilise: "oui" }))}
+                className={`py-2 px-4 rounded-3xl font-bold bg-[#E30613] focus:outline-none focus:ring-2 focus:ring-[#E30613] focus:ring-offset-2`}
+              >
+                Oui
+              </button>
+              <button
+                onClick={() => setFormData((prev) => ({ ...prev, sterilise: "non" }))}
+                className={`py-2 px-4 rounded-3xl font-bold bg-[#E30613] focus:outline-none focus:ring-2 focus:ring-[#E30613] focus:ring-offset-2`}
+              >
+                Non
+              </button>
+            </div>
+            <button
+              onClick={goToPreviousStep}
+              className="bg-[#F8F9E9] text-[#004339] font-bold py-2 px-4 rounded-3xl w-auto absolute bottom-5 left-5 text-2xl"
+            >
+              Précédent
+            </button>
+            <button
+              onClick={goToNextStep}
+              className="bg-[#B0D8C1] text-[#004339] font-bold py-2 px-4 rounded-3xl w-auto absolute bottom-5 right-5 text-2xl"
+            >
+              Suivant
+            </button>
+          </>
+        )}
+
+        {/* Étape 7 */}
+        {currentStep === 7 && (
+          <>
             <h2 className="text-3xl font-bold mb-4 text-center">Résumé des informations :</h2>
             <ul className="bg-[#B0D8C1] p-5 rounded-3xl mb-6">
               {Object.entries(formData).map(([key, value]) => (
@@ -230,11 +264,11 @@ const Formulaire = () => {
 
         {/* Barre de progression */}
         <div className="mt-4">
-        <p className="text-[#149A77] text-center text-xl mb-3">{currentStep === 6 ? "Simulation terminé" : `${6 - currentStep} questions restantes`}</p>
+        <p className="text-[#149A77] text-center text-xl mb-3">{currentStep === 7 ? "Simulation terminé" : `${7 - currentStep} questions restantes`}</p>
           <div className="border-2 border-[#149A77] h-4 rounded-full overflow-hidden w-96">
             <div
               className="bg-[#004339] h-full"
-              style={{ width: `${(currentStep / 6) * 100}%` }}
+              style={{ width: `${(currentStep / 7) * 100}%` }}
             ></div>
           </div>
         </div>
