@@ -4,10 +4,13 @@ import Link from "next/link";
 
 interface NavLinkProps {
   label: string;
+  href: string;
 }
 
-const NavLink: React.FC<NavLinkProps> = ({ label }) => (
-  <div className="self-stretch my-auto">{label}</div>
+const NavLink: React.FC<NavLinkProps> = ({ label, href }) => (
+  <Link href={href}>
+    <div className="self-stretch my-auto">{label}</div>
+  </Link>
 );
 
 const NavigationBar: React.FC = () => {
@@ -15,12 +18,14 @@ const NavigationBar: React.FC = () => {
 
   return (
     <nav className="flex relative justify-between items-center px-12 py-9 w-full min-h-[103px] max-md:px-5 max-md:max-w-full">
-      <div className="z-0 self-stretch my-auto text-2xl text-teal-600 uppercase">
-        se connecter {/* par la suite ajouter une variable pour savoir si connecté ou déconnecté */}
-      </div>
+      <Link href="/pages/PageIndisponible">
+        <div className="z-0 self-stretch my-auto text-2xl text-teal-600 uppercase">
+          se connecter {/* par la suite ajouter une variable pour savoir si connecté ou déconnecté */}
+        </div>
+      </Link>
       <div className="flex z-0 gap-10 items-center self-stretch my-auto text-2xl text-emerald-900 uppercase min-w-[240px] max-md:max-w-full">
         {navLinks.map((link, index) => (
-          <NavLink key={index} label={link} />
+          <NavLink key={index} label={link} href={index === 0 ? '/pages/PageIndisponible' : index === 1 ? '/pages/PageIndisponible' : '/pages/PageIndisponible'} />
         ))}
       </div>
       <div className="flex absolute left-2/4 z-0 gap-6 items-center self-start -translate-x-2/4 bottom-[22px] min-w-[240px] translate-y-[0%]">

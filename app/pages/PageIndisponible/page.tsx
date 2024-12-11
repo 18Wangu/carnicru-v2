@@ -1,11 +1,11 @@
 import Image from 'next/image';
 
-export function PageIndisponible() {
+export default function PageIndisponible() {
     return (
-        <div className='flex flex-col items-center justify-center text-center mt-9'> {/* changer le margin par un calcul de la hauteur de la fenetre moins la navbar */}
+        <div className='h-[calc(100vh-18rem)] flex flex-col items-center justify-center text-center mt-9'> {/* changer le margin par un calcul de la hauteur de la fenetre moins la navbar */}
             <div>
                 <Image 
-                    src="/coeur.svg" 
+                    src="/coeur-rouge.svg" 
                     alt="image de coeur page indisponible" 
                     width={150} 
                     height={150} 
