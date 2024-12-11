@@ -4,9 +4,13 @@ import * as React from "react";
 import { PlanCard } from "../../../components/subscriptionPlans/PlanCard";
 import { PortionDetails } from "../../../components/subscriptionPlans/PortionDetails";
 import { SubscriptionPlan } from "../../../components/subscriptionPlans/types";
+import { useSearchParams } from "next/navigation";
 
 const SubscriptionPlans: React.FC = () => {
   const [selectedPlan, setSelectedPlan] = React.useState<string | null>(null);
+
+  const searchParams = useSearchParams();
+  const nomChien = searchParams.get("nomChien");
 
   const plans: SubscriptionPlan[] = [
     {
@@ -30,12 +34,14 @@ const SubscriptionPlans: React.FC = () => {
   return (
     <div className="flex flex-col items-center font-semibold mt-20">
       <PortionDetails
-        companionName="*Nom du compagnon*"
+        companionName={nomChien}
         portionAmount={530}
         meatPercentage={60}
         bonePercentage={30}
         organsPercentage={10}
       />
+
+      console.log(nomChien);
 
       <div className="flex flex-col items-center mt-36 w-full text-2xl max-md:mt-10 max-md:max-w-full">
         <div className="flex flex-col items-center w-full max-md:max-w-full">

@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { CodePromo } from "@/components/CodePromo";
 
 const Formulaire = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -31,15 +30,9 @@ const Formulaire = () => {
     if (currentStep > 1) setCurrentStep(currentStep - 1);
   };
 
-  const handleConfirm = () => {
-    console.log("Résumé des informations :");
-    console.log(formData);
-    alert("Les informations ont été affichées dans la console !");
-  };
-
   return (
     <div className="flex flex-col items-center justify-center h-[calc(100vh-6.5rem)] text-[#F8F9E9] bg-[#F8F9E9]">
-      <div className="bg-[#149A77] rounded-3xl p-24 shadow-lg relative w-[1000px] h-[600px] flex flex-col justify-center items-center overflow-hidden">
+      <div className="bg-[#149A77] rounded-3xl p-24 shadow-lg relative w-[1000px] h-[500px] flex flex-col justify-center items-center overflow-hidden">
         {/* Étape 1 */}
         {currentStep === 1 && (
           <>
@@ -219,7 +212,12 @@ const Formulaire = () => {
               Précédent
             </button>
             <Link
-              href="/pages/ResultatPortion">
+              href={{
+                pathname: "/pages/ResultatPortion",
+                query: { 
+                  nomChien: formData.nomChien 
+                },
+              }}>
               <button
                 className="bg-[#E30613] text-[#F8F9E9] font-bold py-2 px-4 rounded-3xl w-auto absolute bottom-5 right-5 text-2xl"
               >
@@ -233,7 +231,7 @@ const Formulaire = () => {
         {/* Barre de progression */}
         <div className="mt-4">
         <p className="text-[#149A77] text-center text-xl mb-3">{currentStep === 6 ? "Simulation terminé" : `${6 - currentStep} questions restantes`}</p>
-          <div className="border-2 border-[#149A77] h-2 rounded-full overflow-hidden w-96">
+          <div className="border-2 border-[#149A77] h-4 rounded-full overflow-hidden w-96">
             <div
               className="bg-[#004339] h-full"
               style={{ width: `${(currentStep / 6) * 100}%` }}
