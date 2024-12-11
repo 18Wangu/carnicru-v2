@@ -20,6 +20,8 @@ export const PlanCard: React.FC<PlanCardProps> = ({
               loading="lazy"
               src={imageSrc}
               alt={`${title} subscription plan`}
+              width={351}
+              height={440}
               className="object-cover absolute inset-0 size-full"
             />
             <div className="flex overflow-hidden relative gap-4 items-center p-5 bg-[#149A77] rounded-2xl">

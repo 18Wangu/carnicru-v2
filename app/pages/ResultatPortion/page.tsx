@@ -7,12 +7,11 @@ import { SubscriptionPlan } from "../../../components/subscriptionPlans/types";
 import { useSearchParams } from "next/navigation";
 
 const SubscriptionPlans: React.FC = () => {
-  const [selectedPlan, setSelectedPlan] = React.useState<string | null>(null);
-
   const searchParams = useSearchParams();
   const nomChien = searchParams.get("nomChien");
   const portion = searchParams.get("portion");
 
+  // Faire quelque chose de beaucoup plus simple, pas besoin d'autant de code
   const plans: SubscriptionPlan[] = [
     {
       title: "Formule semaine",
@@ -30,17 +29,11 @@ const SubscriptionPlans: React.FC = () => {
     },
   ];
 
-  const handlePlanSelection = (planTitle: string) => {
-    if (setSelectedPlan) {
-      setSelectedPlan(planTitle);
-    }
-  };
-
   return (
     <div className="flex flex-col items-center font-semibold mt-20">
       <PortionDetails
-        companionName={nomChien}
-        portionAmount={portion}
+        companionName={nomChien || "Nom de votre compagnon"}
+        portionAmount={portion || "0"}
         meatPercentage={60}
         bonePercentage={30}
         organsPercentage={10}
@@ -64,12 +57,10 @@ const SubscriptionPlans: React.FC = () => {
           <div className="flex flex-wrap gap-10 justify-center items-center mt-12 w-full text-white max-md:mt-10 max-md:max-w-full">
             {plans.map((plan) => (
               <PlanCard
-                key={plan.title}
-                title={plan.title}
+                title="Formule semaine"
                 price={plan.price}
                 imageSrc={plan.imageSrc}
                 onChoose={() => {
-                  handlePlanSelection(plan.title);
                   window.location.href = plan.url;
                 }}
               />
@@ -100,7 +91,6 @@ const SubscriptionPlans: React.FC = () => {
               price="3,99€"
               imageSrc="/portion.jpeg"
               onChoose={() => {
-                handlePlanSelection("Formule unité");
                 window.location.href = "/pages/Livraison";
               }}
             />
