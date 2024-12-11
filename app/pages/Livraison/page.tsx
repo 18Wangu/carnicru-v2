@@ -14,7 +14,7 @@ const FormulaireLivraison = () => {
   });
   {/* rendre le poid et la taille interactif, en fonction de la formule choisi ca change */}
   {/* le code produit a ete envoye par mail */}
-  const [parcelDetails, setParcelDetails] = useState({ service: '0', productCode: '6A', as: 'A02', weight: 3 });
+  const [parcelDetails] = useState({ service: '0', productCode: '6A', as: 'A02', weight: 3 });
   const [label, setLabel] = useState('');
 
   const handleSubmit = async () => {

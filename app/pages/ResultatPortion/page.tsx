@@ -31,7 +31,9 @@ const SubscriptionPlans: React.FC = () => {
   ];
 
   const handlePlanSelection = (planTitle: string) => {
-    setSelectedPlan(planTitle);
+    if (setSelectedPlan) {
+      setSelectedPlan(planTitle);
+    }
   };
 
   return (
@@ -55,7 +57,7 @@ const SubscriptionPlans: React.FC = () => {
             </span>
             <br />
             <span className="text-base text-[#149A77]">
-              choisissez l'abonnement qui vous correspond le mieux !
+              choisissez l&aposabonnement qui vous correspond le mieux !
             </span>
           </div>
 

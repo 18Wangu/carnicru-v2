@@ -14,7 +14,7 @@ export const PortionDetails: React.FC<PortionDetailsProps> = ({
       <div className="flex flex-col items-center max-w-full text-center w-[1418px]">
         <div className="text-2xl text-[#004339] max-md:max-w-full">
           <span className="font-bold text-[#149A77]">{companionName}</span> a
-          besoin d'une portion quotidienne de {portionAmount} g par jour
+          besoin d&aposune portion quotidienne de {portionAmount} g par jour
         </div>
         <div className="flex flex-col items-center pl-5 mt-16 max-w-full text-4xl text-[#B9110F] w-[530px] max-md:mt-10">
           <Image
@@ -44,10 +44,10 @@ export const PortionDetails: React.FC<PortionDetailsProps> = ({
           <div className="flex flex-col mt-12 text-xl max-md:mt-10">
             <div className="text-[#B9110F]">{meatPercentage}% de viande crue</div>
             <div className="mt-4 text-[#149A77]">
-              {bonePercentage}% d'os broyés
+              {bonePercentage}% d&aposos broyés
             </div>
             <div className="mt-4 text-[#004339]">
-              {organsPercentage}% d'abats
+              {organsPercentage}% d&aposabats
             </div>
           </div>
         </div>

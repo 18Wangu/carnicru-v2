@@ -73,7 +73,7 @@ const Formulaire = () => {
             {/* Contenu principal */}
             <div className="flex flex-col items-center justify-center relative z-10">
               <h2 className="text-6xl font-bold mb-4 text-center">Quelques questions...</h2>
-              <label className="block text-3xl text-center my-12">Mon chien s'appelle :</label>
+              <label className="block text-3xl text-center my-12">Mon chien s&aposappelle :</label>
               <input
                 type="text"
                 name="nomChien"
@@ -160,7 +160,7 @@ const Formulaire = () => {
         {/* Étape 4 */}
         {currentStep === 4 && (
           <>
-            <h2 className="text-3xl font-bold mb-4 text-center">Niveau d'activité :</h2>
+            <h2 className="text-3xl font-bold mb-4 text-center">Niveau d&aposactivité :</h2>
             <div className="flex gap-3 text-2xl">
               {["Canapé", "Actif", "Sportif"].map((level) => (
                 <button

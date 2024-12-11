@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { PlanCardProps } from "./types";
+import Image from "next/image";
 
 export const PlanCard: React.FC<PlanCardProps> = ({
   title,
@@ -15,7 +16,7 @@ export const PlanCard: React.FC<PlanCardProps> = ({
         <div className="gap-10 text-[#004339]">{title}</div>
         <div className="flex overflow-hidden flex-col mt-5 max-w-full text-right whitespace-nowrap rounded-2xl w-[351px]">
           <div className="flex relative flex-col items-start pt-40 w-full rounded-2xl aspect-[1.245] max-md:pt-24 max-md:pr-5">
-            <img
+            <Image
               loading="lazy"
               src={imageSrc}
               alt={`${title} subscription plan`}
