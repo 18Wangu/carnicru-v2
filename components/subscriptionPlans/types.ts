@@ -17,4 +17,5 @@ export interface SubscriptionPlan {
   title: string;
   price: string;
   imageSrc: string;
+  url: string;
 }

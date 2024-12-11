@@ -4,6 +4,9 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
+type ActivityLevel = "Canapé" | "Actif" | "Sportif";
+type BodyCondition = "Maigre" | "Normal" | "Surpoids";
+
 const Formulaire = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState({
@@ -14,6 +17,25 @@ const Formulaire = () => {
     corpulence: "",
     sterilise: "",
   });
+
+  // calcul des portions
+  const proportions = {
+    Canapé: {
+      Maigre: { nonSterilise: 0.023, sterilise: 0.02 },
+      Normal: { nonSterilise: 0.02, sterilise: 0.017 },
+      Surpoids: { nonSterilise: 0.017, sterilise: 0.014 },
+    },
+    Actif: {
+      Maigre: { nonSterilise: 0.033, sterilise: 0.03 },
+      Normal: { nonSterilise: 0.03, sterilise: 0.027 },
+      Surpoids: { nonSterilise: 0.027, sterilise: 0.024 },
+    },
+    Sportif: {
+      Maigre: { nonSterilise: 0.043, sterilise: 0.04 },
+      Normal: { nonSterilise: 0.04, sterilise: 0.037 },
+      Surpoids: { nonSterilise: 0.037, sterilise: 0.034 },
+    },
+  };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -249,9 +271,26 @@ const Formulaire = () => {
               href={{
                 pathname: "/pages/ResultatPortion",
                 query: { 
-                  nomChien: formData.nomChien 
+                  nomChien: formData.nomChien,
+                  portion: (() => {
+                    const { activite, corpulence, sterilise, poids } = formData;
+
+                    // Vérifie que les champs nécessaires sont remplis
+                    if (!activite || !corpulence || !sterilise || !poids) {
+                      console.error("Veuillez remplir toutes les données.");
+                      return 0; // Retourne une valeur par défaut
+                    }
+
+                    // Calcule la proportion
+                    const steriliseKey = sterilise === "oui" ? "sterilise" : "nonSterilise";
+                    const proportion = proportions[activite as ActivityLevel][corpulence as BodyCondition][steriliseKey];
+
+                    // Calcule la portion
+                    return (parseFloat(poids) * proportion).toFixed(2);
+                  })(),
                 },
-              }}>
+              }}
+            >
               <button
                 className="bg-[#E30613] text-[#F8F9E9] font-bold py-2 px-4 rounded-3xl w-auto absolute bottom-5 right-5 text-2xl"
               >

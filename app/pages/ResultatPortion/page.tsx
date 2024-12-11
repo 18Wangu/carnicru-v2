@@ -11,19 +11,22 @@ const SubscriptionPlans: React.FC = () => {
 
   const searchParams = useSearchParams();
   const nomChien = searchParams.get("nomChien");
+  const portion = searchParams.get("portion");
 
   const plans: SubscriptionPlan[] = [
     {
-      title: "formule semaine",
+      title: "Formule semaine",
       price: "PRIX",
       imageSrc:
         "/portion2.png",
+      url: "#",
     },
     {
-      title: "formule mensuelle",
+      title: "Formule mensuelle",
       price: "PRIX",
       imageSrc:
         "/portion.jpeg",
+      url: "",
     },
   ];
 
@@ -35,13 +38,11 @@ const SubscriptionPlans: React.FC = () => {
     <div className="flex flex-col items-center font-semibold mt-20">
       <PortionDetails
         companionName={nomChien}
-        portionAmount={530}
+        portionAmount={portion}
         meatPercentage={60}
         bonePercentage={30}
         organsPercentage={10}
       />
-
-      console.log(nomChien);
 
       <div className="flex flex-col items-center mt-36 w-full text-2xl max-md:mt-10 max-md:max-w-full">
         <div className="flex flex-col items-center w-full max-md:max-w-full">
@@ -65,7 +66,10 @@ const SubscriptionPlans: React.FC = () => {
                 title={plan.title}
                 price={plan.price}
                 imageSrc={plan.imageSrc}
-                onChoose={() => handlePlanSelection(plan.title)}
+                onChoose={() => {
+                  handlePlanSelection(plan.title);
+                  window.location.href = plan.url;
+                }}
               />
             ))}
           </div>
@@ -90,10 +94,13 @@ const SubscriptionPlans: React.FC = () => {
           
           <div className="mt-10">
             <PlanCard
-              title="formule unité"
+              title="Formule unité"
               price="3,99€"
               imageSrc="/portion.jpeg"
-              onChoose={() => handlePlanSelection("formule unité")}
+              onChoose={() => {
+                handlePlanSelection("Formule unité");
+                window.location.href = "https://buy.stripe.com/test_3cs9Ew5xy9HA0dWbIK";
+              }}
             />
           </div>
         </div>
