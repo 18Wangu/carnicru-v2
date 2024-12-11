@@ -99,7 +99,7 @@ const SubscriptionPlans: React.FC = () => {
               imageSrc="/portion.jpeg"
               onChoose={() => {
                 handlePlanSelection("Formule unité");
-                window.location.href = "https://buy.stripe.com/test_3cs9Ew5xy9HA0dWbIK";
+                window.location.href = "/pages/Livraison";
               }}
             />
           </div>
