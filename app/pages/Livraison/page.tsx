@@ -1,6 +1,10 @@
 'use client';
 
+import { CodePromo } from '@/components/CodePromo';
+import { Footer } from '@/components/Footer';
 import { useState } from 'react';
+import { montserratFont } from '../../fonts/font';
+import Image from 'next/image';
 
 const FormulaireLivraison = () => {
   const [recipient, setRecipient] = useState({
@@ -37,75 +41,88 @@ const FormulaireLivraison = () => {
 
   return (
     <div>
-      <h1>Formulaire de livraison</h1>
-      <form onSubmit={(e) => e.preventDefault()}>
+      <CodePromo />
+      <div className='flex flex-col justify-center items-center h-[calc(100vh-17rem)] relative'>
         <div>
-          <label>Nom du destinataire</label>
-          <input
-            className='text-blue-700 border'
-            type="text"
-            value={recipient.name}
-            onChange={(e) => setRecipient({ ...recipient, name: e.target.value })}
+          <h1 className='text-4xl mb-5 text-[#004339]'>Formulaire de livraison</h1>
+          <form onSubmit={(e) => e.preventDefault()}>
+            <div>
+              <input
+                type="text"
+                placeholder="Nom du destinataire"
+                value={recipient.name}
+                onChange={(e) => setRecipient({ ...recipient, name: e.target.value })}
+                className={`text-[#009874] text-xl bg-[#B0D8C1] placeholder:text-[#009874] placeholder:opacity-75 rounded-xl w-[700px] h-12 pl-4 my-2 focus:outline-none focus:ring-2 focus:ring-[#009874] ${montserratFont.className}`}
+              />
+            </div>
+            <div>
+              <input
+                type="text"
+                placeholder="Adresse"
+                value={recipient.address1}
+                onChange={(e) => setRecipient({ ...recipient, address1: e.target.value })}
+                className={`text-[#009874] text-xl bg-[#B0D8C1] placeholder:text-[#009874] placeholder:opacity-75 rounded-xl w-[700px] h-12 pl-4 my-2 focus:outline-none focus:ring-2 focus:ring-[#009874] ${montserratFont.className}`}
+              />
+            </div>
+            <div>
+              <input
+                type="text"
+                placeholder="Ville"
+                value={recipient.city}
+                onChange={(e) => setRecipient({ ...recipient, city: e.target.value })}
+                className={`text-[#009874] text-xl bg-[#B0D8C1] placeholder:text-[#009874] placeholder:opacity-75 rounded-xl w-[700px] h-12 pl-4 my-2 focus:outline-none focus:ring-2 focus:ring-[#009874] ${montserratFont.className}`}
+              />
+            </div>
+            <div>
+              <input
+                type="text"
+                placeholder="Code postal"
+                value={recipient.zipCode}
+                onChange={(e) => setRecipient({ ...recipient, zipCode: e.target.value })}
+                className={`text-[#009874] text-xl bg-[#B0D8C1] placeholder:text-[#009874] placeholder:opacity-75 rounded-xl w-[700px] h-12 pl-4 my-2 focus:outline-none focus:ring-2 focus:ring-[#009874] ${montserratFont.className}`}
+              />
+            </div>
+            <div>
+              <input
+                type="text"
+                placeholder="Numéro de téléphone"
+                value={recipient.phone}
+                onChange={(e) => setRecipient({ ...recipient, phone: e.target.value })}
+                className={`text-[#009874] text-xl bg-[#B0D8C1] placeholder:text-[#009874] placeholder:opacity-75 rounded-xl w-[700px] h-12 pl-4 my-2 focus:outline-none focus:ring-2 focus:ring-[#009874] ${montserratFont.className}`}
+              />
+            </div>
+            <div>
+              <input
+                type="email"
+                placeholder="Email"
+                value={recipient.email}
+                onChange={(e) => setRecipient({ ...recipient, email: e.target.value })}
+                className={`text-[#009874] text-xl bg-[#B0D8C1] placeholder:text-[#009874] placeholder:opacity-75 rounded-xl w-[700px] h-12 pl-4 my-2 focus:outline-none focus:ring-2 focus:ring-[#009874] ${montserratFont.className}`}
+              />
+            </div>
+            {/* Ajoutez un bouton pour soumettre le formulaire */}
+            <button onClick={handleSubmit} className='bg-[#E30613] text-white text-xl rounded-xl py-3 px-8 mt-4'>Enregistrer</button>
+            {/* rediriger vers la page de payment https://buy.stripe.com/test_3cs9Ew5xy9HA0dWbIK */}
+          </form>
+          <Image 
+            src='/camion-livraison.svg' 
+            alt='camion livraison viande carnicru' 
+            width={200} 
+            height={200} 
+            className="absolute bottom-20 right-56"
           />
         </div>
-        <div>
-          <label>Adresse 1 du destinataire</label>
-          <input
-            className='text-blue-700 border'
-            type="text"
-            value={recipient.address1}
-            onChange={(e) => setRecipient({ ...recipient, address1: e.target.value })}
-          />
-        </div>
-        <div>
-          <label>Ville du destinataire</label>
-          <input
-            className='text-blue-700 border'
-            type="text"
-            value={recipient.city}
-            onChange={(e) => setRecipient({ ...recipient, city: e.target.value })}
-          />
-        </div>
-        <div>
-          <label>Code postal du destinataire</label>
-          <input
-            className='text-blue-700 border'
-            type="text"
-            value={recipient.zipCode}
-            onChange={(e) => setRecipient({ ...recipient, zipCode: e.target.value })}
-          />
-        </div>
-        <div>
-          <label>Téléphone du destinataire</label>
-          <input
-            className='text-blue-700 border'
-            type="text"
-            value={recipient.phone}
-            onChange={(e) => setRecipient({ ...recipient, phone: e.target.value })}
-          />
-        </div>
-        <div>
-          <label>Email du destinataire</label>
-          <input
-            className='text-blue-700 border'
-            type="email"
-            value={recipient.email}
-            onChange={(e) => setRecipient({ ...recipient, email: e.target.value })}
-          />
-        </div>
-        {/* Ajoutez un bouton pour soumettre le formulaire */}
-        <button onClick={handleSubmit}>Envoyer</button>
-        {/* rediriger vers la page de payment https://buy.stripe.com/test_3cs9Ew5xy9HA0dWbIK */}
-      </form>
 
-      {/* Pour visioner la requete post envoyé - trouver un moyen de l'envoyer par mail a sitealacarte49@gmail.com a chaque fois qu'un client rentre les informations de livraison
-        En revanche attendre que le client est validé le payment, trouver un system où il faut attendre la confirmation du payment pour imprimer l'etiquette pour envoyer la livraison*/}
-      {label && (
-        <div>
-          <h2>Étiquette générée</h2>
-          <pre>{label}</pre>
-        </div>
-      )}
+        {/* Pour visioner la requete post envoyé - trouver un moyen de l'envoyer par mail a sitealacarte49@gmail.com a chaque fois qu'un client rentre les informations de livraison
+          En revanche attendre que le client est validé le payment, trouver un system où il faut attendre la confirmation du payment pour imprimer l'etiquette pour envoyer la livraison*/}
+        {label && (
+          <div>
+            <h2>Étiquette générée</h2>
+            <pre>{label}</pre>
+          </div>
+        )}
+      </div>
+      <Footer />
     </div>
   );
 };

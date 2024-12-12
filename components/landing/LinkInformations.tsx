@@ -29,7 +29,7 @@ export function LinkInformations() {
           </Link>
         </article>
         <article className="flex justify-between items-center flex-1 bg-[#B9110F] rounded-3xl mr-4">
-          <Link href="/pages/PageIndisponible" className='flex justify-between items-center w-full'>
+          <Link href="/pages/Barf" className='flex justify-between items-center w-full'>
             <h1 className="text-[#F8F9E9] ml-7 text-2xl">Le BARF <br /> en bref !</h1>
             <Image
               src="/boucle.svg"
