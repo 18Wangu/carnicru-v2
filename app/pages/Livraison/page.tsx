@@ -114,13 +114,13 @@ const FormulaireLivraison = () => {
         </div>
 
         {/* Pour visioner la requete post envoyé - trouver un moyen de l'envoyer par mail a sitealacarte49@gmail.com a chaque fois qu'un client rentre les informations de livraison
-          En revanche attendre que le client est validé le payment, trouver un system où il faut attendre la confirmation du payment pour imprimer l'etiquette pour envoyer la livraison*/}
+          En revanche attendre que le client est validé le payment, trouver un system où il faut attendre la confirmation du payment pour imprimer l'etiquette pour envoyer la livraison
         {label && (
           <div>
             <h2>Étiquette générée</h2>
             <pre>{label}</pre>
           </div>
-        )}
+        )}*/}
       </div>
       <Footer />
     </div>
