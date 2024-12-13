@@ -5,7 +5,7 @@ export function LinkInformations() {
   return (
     <section className="flex flex-col lg:flex-row w-full">
         <article className="flex items-center flex-1 bg-[#149A77] rounded-3xl mr-4">
-        <Link href="/pages/PageIndisponible" className='flex justify-between items-center w-full'>
+        <Link href="/pages/QuiSommesNous" className='flex justify-between items-center w-full'>
             <h1 className="text-[#F8F9E9] ml-7 text-2xl">Qui sommes <br /> nous ?</h1>
             <Image
               src="/croquette.svg"
