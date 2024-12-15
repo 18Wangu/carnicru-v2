@@ -22,7 +22,8 @@ const FormulaireLivraison = () => {
   // const [label, setLabel] = useState('');
 
   const handleSubmit = async () => {
-    const response = await fetch('/api', {
+    //const response = await fetch('/api', {
+      await fetch('/api', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -30,7 +31,7 @@ const FormulaireLivraison = () => {
       body: JSON.stringify({ recipient, parcelDetails }),
     });
 
-    const data = await response.json();
+    // const data = await response.json();
 
     /*
     if (data.success) {
