@@ -5,6 +5,7 @@ import { Footer } from '@/components/Footer';
 import { useState } from 'react';
 import { montserratFont } from '../../fonts/font';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const FormulaireLivraison = () => {
   const [recipient, setRecipient] = useState({
@@ -42,7 +43,7 @@ const FormulaireLivraison = () => {
   return (
     <div>
       <CodePromo />
-      <div className='flex flex-col justify-center items-center h-[calc(100vh-17rem)] relative'>
+      <div className='flex flex-col justify-center items-center h-[calc(100vh-9rem)] relative'>
         <div>
           <h1 className='text-4xl mb-5 text-[#004339]'>Formulaire de livraison</h1>
           <form onSubmit={(e) => e.preventDefault()}>
@@ -100,16 +101,18 @@ const FormulaireLivraison = () => {
                 className={`text-[#009874] text-xl bg-[#B0D8C1] placeholder:text-[#009874] placeholder:opacity-75 rounded-xl w-[700px] h-12 pl-4 my-2 focus:outline-none focus:ring-2 focus:ring-[#009874] ${montserratFont.className}`}
               />
             </div>
-            {/* Ajoutez un bouton pour soumettre le formulaire */}
-            <button onClick={handleSubmit} className='bg-[#E30613] text-white text-xl rounded-xl py-3 px-8 mt-4'>Enregistrer</button>
-            {/* rediriger vers la page de payment https://buy.stripe.com/test_3cs9Ew5xy9HA0dWbIK */}
+            <Link href='https://buy.stripe.com/test_3cs9Ew5xy9HA0dWbIK'>
+              <button onClick={handleSubmit} className='bg-[#E30613] text-white text-xl rounded-xl py-3 px-8 mt-4'>
+                Enregistrer
+              </button>
+            </Link>
           </form>
           <Image 
             src='/camion-livraison.svg' 
             alt='camion livraison viande carnicru' 
             width={200} 
             height={200} 
-            className="absolute bottom-20 right-56"
+            className="absolute bottom-5 right-56"
           />
         </div>
 
@@ -122,7 +125,6 @@ const FormulaireLivraison = () => {
           </div>
         )}*/}
       </div>
-      <Footer />
     </div>
   );
 };
