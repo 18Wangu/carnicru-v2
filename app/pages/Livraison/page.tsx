@@ -1,7 +1,6 @@
 'use client';
 
 import { CodePromo } from '@/components/CodePromo';
-import { Footer } from '@/components/Footer';
 import { useState } from 'react';
 import { montserratFont } from '../../fonts/font';
 import Image from 'next/image';
@@ -20,7 +19,7 @@ const FormulaireLivraison = () => {
   {/* rendre le poid et la taille interactif, en fonction de la formule choisi ca change */}
   {/* le code produit a ete envoye par mail */}
   const [parcelDetails] = useState({ service: '0', productCode: '6A', as: 'A02', weight: 3 });
-  const [label, setLabel] = useState('');
+  // const [label, setLabel] = useState('');
 
   const handleSubmit = async () => {
     const response = await fetch('/api', {
@@ -33,11 +32,12 @@ const FormulaireLivraison = () => {
 
     const data = await response.json();
 
+    /*
     if (data.success) {
       setLabel(data.label); // Affichez ou téléchargez l'étiquette
     } else {
       console.error(data.message);
-    }
+    }*/
   };
 
   return (
@@ -112,7 +112,7 @@ const FormulaireLivraison = () => {
             alt='camion livraison viande carnicru' 
             width={200} 
             height={200} 
-            className="absolute bottom-5 right-56"
+            className="absolute bottom-5 right-48"
           />
         </div>
 

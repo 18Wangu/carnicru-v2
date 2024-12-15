@@ -17,7 +17,7 @@ const Page = () => {
                     />
                     <div>
                         <h1 className='text-5xl mb-10'>Qui sommes-nous ?</h1>
-                        <p className={`text-xl w-[600px] ${montserratFont.className}`}>Carnicru est une entreprise qui s'engage à changer l'alimentation des carnivores 
+                        <p className={`text-xl w-[600px] ${montserratFont.className}`}>Carnicru est une entreprise qui s&apos;engage à changer l&apos;alimentation des carnivores 
                             domestiques en offrant une nouvelle solution nutritionnelle. L&rsquo;objectif est de fournir 
                             aux gardiens de ces compagnons une alimentation optimale, soucieux de la santé et du 
                             bien-être de leurs animaux de compagnie. </p>
@@ -65,7 +65,7 @@ const Page = () => {
                     />
                     <div>
                         <h2 className='text-3xl mb-10'>La volonté du sur-mesure </h2>
-                        <p className={`text-xl w-[600px] ${montserratFont.className}`}>Nous croyons fermement en la singularité de chaque animal, c'est pourquoi nous accordons 
+                        <p className={`text-xl w-[600px] ${montserratFont.className}`}>Nous croyons fermement en la singularité de chaque animal, c&apos;est pourquoi nous accordons 
                             une attention particulière à comprendre ses besoins spécifiques. Nous nous investissons 
                             dans la création de repas en parfaite harmonie avec la physiologie individuelle de votre compagnon.</p>
                     </div>
