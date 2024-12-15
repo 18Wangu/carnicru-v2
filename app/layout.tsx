@@ -8,8 +8,6 @@ export const metadata: Metadata = {
   description: "Carnicru, le site de vente de viande en ligne pour chien", // a modifier
 };
 
-export const favicon = "/icone-carnicru.svg";
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -18,7 +16,7 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <head>
-        <link rel="icon" href={favicon} />
+        <link rel="icon" href="/icone-carnicru.svg" />
       </head>
       <body className={`${daysOneFont.className} bg-[#F8F9E9]`}>
         <NavLink />
