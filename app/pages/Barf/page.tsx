@@ -20,7 +20,7 @@ const App: React.FC = () => {
                         <p className={`text-xl w-[600px] ${montserratFont.className}`}>Le BARF (Biologically Appropriate Raw Food) est un régime alimentaire pour chiens et chats 
                             qui consiste à leur fournir de la nourriture crue, principalement composée de viandes, d'os, 
                             de légumes et de fruits. L&apos;objectif de ce régime est de revenir à une alimentation plus naturelle 
-                            et plus proche de celle qu&apos;ils consomment à l'état sauvage.</p>
+                            et plus proche de celle qu&apos;ils consomment à l&apos;état sauvage.</p>
                     </div>
                 </div>
                 <div className='flex gap-10 items-center'>
@@ -161,7 +161,7 @@ const App: React.FC = () => {
                             <h1 className="text-3xl">Amélioration de la santé</h1>
                             <p className={`text-xl text-center mt-4 ${montserratFont.className}`}>
                                 Une alimentation crue, sans additifs, peut améliorer la santé de la peau, 
-                                la brillance du pelage, la digestion et le niveau d'énergie de l'animal.
+                                la brillance du pelage, la digestion et le niveau d'énergie de l&apos;animal.
                             </p>
                         </div>
                     </div>
@@ -186,7 +186,7 @@ const App: React.FC = () => {
                             <h1 className="text-3xl">Poids optimal</h1>
                             <p className={`text-xl text-center mt-4 ${montserratFont.className}`}>
                                 Le BARF permet de mieux contrôler 
-                                le poids de l'animal en ajustant les portions et en supprimant les matières grasses et 
+                                le poids de l&apos;animal en ajustant les portions et en supprimant les matières grasses et 
                                 les sucres ajoutés présents dans les croquettes industrielles.
                             </p>
                         </div>
