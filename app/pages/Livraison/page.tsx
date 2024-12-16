@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { montserratFont } from '../../fonts/font';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 
 const FormulaireLivraison = () => {
   const [recipient, setRecipient] = useState({
@@ -16,14 +17,15 @@ const FormulaireLivraison = () => {
     email: '',
     country: 'FR',
   });
-  {/* rendre le poid et la taille interactif, en fonction de la formule choisi ca change */}
-  {/* le code produit a ete envoye par mail */}
   const [parcelDetails] = useState({ service: '0', productCode: '6A', as: 'A02', weight: 3 });
-  // const [label, setLabel] = useState('');
+  const [label, setLabel] = useState('');
+
+  //recuperer le prix de ResultatPortion
+  const searchParams = useSearchParams();
+  const prix = searchParams.get("prix");
 
   const handleSubmit = async () => {
-    //const response = await fetch('/api', {
-      await fetch('/api', {
+    const response = await fetch('/api', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -31,23 +33,39 @@ const FormulaireLivraison = () => {
       body: JSON.stringify({ recipient, parcelDetails }),
     });
 
-    // const data = await response.json();
+    const data = await response.json();
 
-    /*
     if (data.success) {
       setLabel(data.label); // Affichez ou téléchargez l'étiquette
     } else {
       console.error(data.message);
-    }*/
+    }
+  };
+
+  const handleSubmitPrix = async () => {
+    // Envoie du prix récupéré et des détails à l'API pour créer une session Stripe
+    const response = await fetch('/api/createCheckoutSession', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ prix }), // Envoie le prix récupéré
+    });
+
+    const data = await response.json();
+
+    if (data.url) {
+      // Redirige l'utilisateur vers l'URL de paiement dynamique Stripe
+      window.location.href = data.url;
+    } else {
+      console.error('Erreur lors de la création de la session de paiement');
+    }
   };
 
   return (
     <div>
       <CodePromo />
       <div className='flex flex-col justify-center items-center h-[calc(100vh-9rem)] relative'>
-        <Link href="/pages/ResultatPortion" className='absolute top-7 left-12 text-[#004339] text-xl hover:underline hover:underline-offset-4'>
-          <span>Retour</span>
-        </Link>
         <div>
           <h1 className='text-4xl mb-5 text-[#004339]'>Formulaire de livraison</h1>
           <form onSubmit={(e) => e.preventDefault()}>
@@ -105,11 +123,13 @@ const FormulaireLivraison = () => {
                 className={`text-[#009874] text-xl bg-[#B0D8C1] placeholder:text-[#009874] placeholder:opacity-75 rounded-xl w-[700px] h-12 pl-4 my-2 focus:outline-none focus:ring-2 focus:ring-[#009874] ${montserratFont.className}`}
               />
             </div>
+            {/* Je souhaite payer avec stripe, pour cela stripe doit me faire un payment du montant = {prix} que j'ai recuperer de la page precedente */}
             <Link href='https://buy.stripe.com/test_3cs9Ew5xy9HA0dWbIK'>
-              <button onClick={handleSubmit} className='bg-[#E30613] text-white text-xl rounded-xl py-3 px-8 mt-4'>
+              <button className='bg-[#E30613] text-white text-xl rounded-xl py-3 px-8 mt-4'>
                 Enregistrer
               </button>
             </Link>
+            <button onClick={handleSubmit} className='bg-black text-white'>Base64</button>
           </form>
           <Image 
             src='/camion-livraison.svg' 
@@ -121,13 +141,13 @@ const FormulaireLivraison = () => {
         </div>
 
         {/* Pour visioner la requete post envoyé - trouver un moyen de l'envoyer par mail a sitealacarte49@gmail.com a chaque fois qu'un client rentre les informations de livraison
-          En revanche attendre que le client est validé le payment, trouver un system où il faut attendre la confirmation du payment pour imprimer l'etiquette pour envoyer la livraison
+          En revanche attendre que le client est validé le payment, trouver un system où il faut attendre la confirmation du payment pour imprimer l'etiquette pour envoyer la livraison */}
         {label && (
           <div>
-            <h2>Étiquette générée</h2>
-            <pre>{label}</pre>
+            <h2 className='text-green-500'>Étiquette générée</h2>
+            <pre className='w-96 text-blue-800'>{label}</pre>
           </div>
-        )}*/}
+        )}
       </div>
     </div>
   );

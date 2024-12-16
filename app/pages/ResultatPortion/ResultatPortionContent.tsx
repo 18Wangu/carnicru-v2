@@ -19,27 +19,24 @@ const ResultatPortionContent: React.FC = () => {
       title: "Formule semaine",
       price: (portions * 0.0095 * 7).toFixed(2) + "€",
       imageSrc: "/portion2.png",
-      url: "/pages/Livraison",
     },
     {
       title: "Formule mensuelle",
       price: ((portions * 0.0095 * 30) * 0.95).toFixed(2) + "€",
       imageSrc: "/portion2.png",
-      url: "/pages/Livraison",
     },
     {
       title: "Formule unité",
       price: (portions * 0.0095).toFixed(2) + "€",
       imageSrc: "/portion2.png",
-      url: "/pages/Livraison",
     },
   ];
+
 
   const renderPlanCard = (
     title: string,
     price: string,
     imageSrc: string,
-    url: string
   ) => (
     <div className="flex gap-10 items-start self-stretch my-auto min-w-[240px] w-[351px]">
       <div className="flex flex-col items-center h-[420px] min-w-[240px] w-[351px]">
@@ -59,13 +56,19 @@ const ResultatPortionContent: React.FC = () => {
             </div>
           </div>
         </div>
-        <button
-          onClick={() => (window.location.href = url)}
-          className="gap-2.5 self-stretch p-5 mt-5 max-w-full text-center text-white whitespace-nowrap bg-[#B9110F] rounded-2xl w-[351px] hover:bg-[#E30613] focus:outline-none focus:ring-2 focus:ring-[#E30613] focus:ring-offset-2"
-          aria-label={`Choisir ${title}`}
+        <Link
+          href={{
+            pathname: "/pages/Livraison",
+            query: { 
+              prix: (() => {
+                return (price);
+              })(),
+            },
+          }}
+          className="gap-2.5 self-stretch p-5 mt-5 max-w-full text-center text-white whitespace-nowrap bg-[#B9110F] rounded-2xl w-[351px] hover:bg-[#E30613] focus:outline-none focus:ring-2 focus:ring-[#E30613] focus:ring-offset-2" aria-label={`Choisir ${title}`}
         >
           Choisir
-        </button>
+        </Link>
         <div className="flex gap-10 mt-5 min-h-[24px]" />
       </div>
     </div>
@@ -133,7 +136,7 @@ const ResultatPortionContent: React.FC = () => {
           <div className="flex flex-wrap gap-10 justify-center items-center mt-12 w-full text-white max-md:mt-10 max-md:max-w-full">
             {plans.slice(0, 2).map((plan, index) => (
               <div key={plan.title || index}>
-                {renderPlanCard(plan.title, plan.price, plan.imageSrc, plan.url)}
+                {renderPlanCard(plan.title, plan.price, plan.imageSrc)}
               </div>
             ))}
           </div>
@@ -155,8 +158,7 @@ const ResultatPortionContent: React.FC = () => {
               {renderPlanCard(
                 plans[2].title,
                 plans[2].price,
-                plans[2].imageSrc,
-                plans[2].url
+                plans[2].imageSrc
               )}
             </div>
           </div>
