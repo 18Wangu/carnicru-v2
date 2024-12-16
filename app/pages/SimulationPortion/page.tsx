@@ -21,19 +21,19 @@ const Formulaire = () => {
   // calcul des portions
   const proportions = {
     Canapé: {
-      Maigre: { nonSterilise: 0.023, sterilise: 0.02 },
-      Normal: { nonSterilise: 0.02, sterilise: 0.017 },
-      Surpoids: { nonSterilise: 0.017, sterilise: 0.014 },
+      Maigre: { nonSterilise: 23, sterilise: 20 },
+      Normal: { nonSterilise: 20, sterilise: 17 },
+      Surpoids: { nonSterilise: 17, sterilise: 14 },
     },
     Actif: {
-      Maigre: { nonSterilise: 0.033, sterilise: 0.03 },
-      Normal: { nonSterilise: 0.03, sterilise: 0.027 },
-      Surpoids: { nonSterilise: 0.027, sterilise: 0.024 },
+      Maigre: { nonSterilise: 33, sterilise: 30 },
+      Normal: { nonSterilise: 30, sterilise: 27 },
+      Surpoids: { nonSterilise: 27, sterilise: 24 },
     },
     Sportif: {
-      Maigre: { nonSterilise: 0.043, sterilise: 0.04 },
-      Normal: { nonSterilise: 0.04, sterilise: 0.037 },
-      Surpoids: { nonSterilise: 0.037, sterilise: 0.034 },
+      Maigre: { nonSterilise: 43, sterilise: 40 },
+      Normal: { nonSterilise: 40, sterilise: 37 },
+      Surpoids: { nonSterilise: 37, sterilise: 34 },
     },
   };
 
@@ -73,7 +73,7 @@ const Formulaire = () => {
             {/* Contenu principal */}
             <div className="flex flex-col items-center justify-center relative z-10">
               <h2 className="text-6xl font-bold mb-4 text-center">Quelques questions...</h2>
-              <label className="block text-3xl text-center my-12">Mon chien s&apo;sappelle :</label>
+              <label className="block text-3xl text-center my-12">Mon chien s&apos;appelle :</label>
               <input
                 type="text"
                 name="nomChien"

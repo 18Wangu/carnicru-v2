@@ -45,6 +45,9 @@ const FormulaireLivraison = () => {
     <div>
       <CodePromo />
       <div className='flex flex-col justify-center items-center h-[calc(100vh-9rem)] relative'>
+        <Link href="/pages/ResultatPortion" className='absolute top-7 left-12 text-[#004339] text-xl hover:underline hover:underline-offset-4'>
+          <span>Retour</span>
+        </Link>
         <div>
           <h1 className='text-4xl mb-5 text-[#004339]'>Formulaire de livraison</h1>
           <form onSubmit={(e) => e.preventDefault()}>

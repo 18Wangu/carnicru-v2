@@ -25,7 +25,7 @@ const NavigationBar: React.FC = () => {
       </Link>
       <div className="flex z-0 gap-10 items-center self-stretch my-auto text-2xl text-emerald-900 uppercase min-w-[240px] max-md:max-w-full">
         {navLinks.map((link, index) => (
-          <NavLink key={index} label={link} href={index === 0 ? '/pages/PageIndisponible' : index === 1 ? '/pages/PageIndisponible' : '/pages/PageIndisponible'} />
+          <NavLink key={index} label={link} href={index === 0 ? '/' : index === 1 ? '/pages/PageIndisponible' : '/pages/PageIndisponible'} />
         ))}
       </div>
       <div className="flex absolute left-2/4 z-0 gap-6 items-center self-start -translate-x-2/4 bottom-[22px] min-w-[240px] translate-y-[0%]">
