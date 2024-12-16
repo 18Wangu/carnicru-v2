@@ -2,11 +2,17 @@ import React from 'react';
 import Image from 'next/image';
 import { montserratFont } from '@/app/fonts/font';
 import { Footer } from '@/components/Footer';
+import Link from 'next/link';
+import { CodePromo } from '@/components/CodePromo';
 
 const Page = () => {
     return (
         <div className='relative'>
+            <CodePromo />
             <div className='text-[#004339] flex flex-col items-center mx-44 mt-24 mb-60 gap-24'>
+                <Link href="/" className='absolute top-20 left-12 text-xl hover:underline hover:underline-offset-4'>
+                    <span>Retour</span>
+                </Link>
                 <div className="flex gap-10  items-center">
                     <Image
                         src="/viande.jpg"

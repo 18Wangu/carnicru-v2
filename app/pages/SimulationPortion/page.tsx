@@ -73,7 +73,7 @@ const Formulaire = () => {
             {/* Contenu principal */}
             <div className="flex flex-col items-center justify-center relative z-10">
               <h2 className="text-6xl font-bold mb-4 text-center">Quelques questions...</h2>
-              <label className="block text-3xl text-center my-12">Mon chien s&aposappelle :</label>
+              <label className="block text-3xl text-center my-12">Mon chien s&apo;sappelle :</label>
               <input
                 type="text"
                 name="nomChien"
