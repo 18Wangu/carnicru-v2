@@ -1,7 +1,7 @@
 'use client';
 
 import { CodePromo } from '@/components/CodePromo';
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 import { montserratFont } from '../../fonts/font';
 import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
@@ -208,4 +208,10 @@ const FormulaireLivraison = () => {
   );
 };
 
-export default FormulaireLivraison;
+const PageLivraison = () => {
+  <Suspense fallback={<div>Chargement...</div>}>
+    <FormulaireLivraison />
+  </Suspense>
+};
+
+export default PageLivraison;
