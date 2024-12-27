@@ -6,8 +6,25 @@ import { montserratFont } from '../../fonts/font';
 import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
 
+interface Recipient {
+  name: string;
+  address1: string;
+  city: string;
+  zipCode: string;
+  phone: string;
+  email: string;
+  country: string;
+}
+
+interface ParcelDetails {
+  service: string;
+  productCode: string;
+  as: string;
+  weight: number;
+}
+
 const FormulaireLivraison = () => {
-  const [recipient, setRecipient] = useState({
+  const [recipient, setRecipient] = useState<Recipient>({
     name: '',
     address1: '',
     city: '',
@@ -16,38 +33,10 @@ const FormulaireLivraison = () => {
     email: '',
     country: 'FR',
   });
-  const [parcelDetails] = useState({ service: '0', productCode: '6A', as: 'A02', weight: 3 });
-  const [label, setLabel] = useState('');
+  const [parcelDetails] = useState<ParcelDetails>({ service: '0', productCode: '6A', as: 'A02', weight: 3 });
+  const [label, setLabel] = useState<string>('');
   const searchParams = useSearchParams();
   const prix = searchParams.get("prix"); // Récupère le prix depuis l'URL
-
-  const handleSubmitPrix = async () => {
-    try {
-      if (!prix) {
-        alert('Prix non défini ou incorrect.');
-        return;
-      }
-
-      const response = await fetch('/api/createCheckoutSession', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ prix }), // Envoie le prix récupéré à l'API
-      });
-
-      const data = await response.json();
-
-      if (data.url) {
-        // Redirige vers Stripe Checkout
-        window.location.href = data.url;
-      } else {
-        console.error('Erreur lors de la création de la session de paiement :', data.error);
-      }
-    } catch (error) {
-      console.error('Erreur lors du paiement Stripe :', error);
-    }
-  };
 
   const handleSubmit = async () => {
     const response = await fetch('/api', {
@@ -64,6 +53,58 @@ const FormulaireLivraison = () => {
       setLabel(data.label); // Affichez ou téléchargez l'étiquette
     } else {
       console.error(data.message);
+    }
+  };
+  
+  const handleSubmitPrix = async () => {
+    try {
+      if (!prix) {
+        alert('Prix non défini ou incorrect.');
+        return;
+      }
+
+      // Étape 1 : Générer l'étiquette
+      const responseLabel = await fetch('/api', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ recipient, parcelDetails }),
+      });
+
+      const dataLabel = await responseLabel.json();
+
+      if (dataLabel.success) {
+        const labelGenerated = dataLabel.label;
+
+        // Étape 2 : Envoyer l'étiquette par e-mail
+        const emailResponse = await fetch('/api/send-email', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ label: labelGenerated, recipient }),
+        });
+
+        if (!emailResponse.ok) {
+          console.error('Erreur lors de l envoi de l e-mail.');
+        }
+
+        // Étape 3 : Rediriger vers Stripe Checkout
+        const responseStripe = await fetch('/api/createCheckoutSession', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ prix }),
+        });
+
+        const dataStripe = await responseStripe.json();
+
+        if (dataStripe.url) {
+          window.location.href = dataStripe.url;
+        } else {
+          console.error('Erreur lors de la création de la session de paiement :', dataStripe.error);
+        }
+      } else {
+        console.error('Erreur lors de la génération de l étiquette :', dataLabel.message);
+      }
+    } catch (error) {
+      console.error('Erreur lors du paiement Stripe :', error);
     }
   };
 
@@ -134,14 +175,14 @@ const FormulaireLivraison = () => {
               onClick={handleSubmitPrix}
               className='bg-[#E30613] text-white text-xl rounded-xl py-3 px-8 mt-4'
             >
-              Payer {prix ? `${prix} €` : ''}
+              Payer {prix ? `${prix}` : ''}
             </button>
 
-            {/* 
+            
             <button onClick={handleSubmit} className='bg-black text-white mt-4'>
               Générer une étiquette
             </button>
-            */}
+            
           </form>
           <Image
             src='/camion-livraison.svg'
