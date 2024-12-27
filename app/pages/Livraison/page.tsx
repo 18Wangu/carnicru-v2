@@ -178,11 +178,11 @@ const FormulaireLivraison = () => {
               Payer {prix ? `${prix}` : ''}
             </button>
 
-            
+            {/* 
             <button onClick={handleSubmit} className='bg-black text-white mt-4'>
               Générer une étiquette
             </button>
-            
+            */}
           </form>
           <Image
             src='/camion-livraison.svg'
