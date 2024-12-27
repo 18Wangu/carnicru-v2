@@ -59,7 +59,7 @@ const Page = () => {
                     alt="Chien et chat"
                     width={200}
                     height={500}
-                    className="absolute top-[1250px] left-24"
+                    className="absolute top-[1350px] left-24"
                 />
                 <div className="flex gap-10 items-center" items-center>
                     <Image
