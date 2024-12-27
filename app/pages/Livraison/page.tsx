@@ -34,10 +34,11 @@ const FormulaireLivraison = () => {
     country: 'FR',
   });
   const [parcelDetails] = useState<ParcelDetails>({ service: '0', productCode: '6A', as: 'A02', weight: 3 });
-  const [label, setLabel] = useState<string>('');
+  // const [label, setLabel] = useState<string>('');
   const searchParams = useSearchParams();
   const prix = searchParams.get("prix"); // Récupère le prix depuis l'URL
 
+  {/*
   const handleSubmit = async () => {
     const response = await fetch('/api', {
       method: 'POST',
@@ -55,6 +56,7 @@ const FormulaireLivraison = () => {
       console.error(data.message);
     }
   };
+  */}
   
   const handleSubmitPrix = async () => {
     try {
@@ -194,12 +196,13 @@ const FormulaireLivraison = () => {
         </div>
 
         {/* Envoyer ce label par mail grace a resend */}
+        {/*
         {label && (
           <div>
             <h2 className='text-green-500'>Étiquette générée</h2>
             <pre className='w-96 text-blue-800'>{label}</pre>
           </div>
-        )}
+        )}*/}
       </div>
     </div>
   );

@@ -31,8 +31,13 @@ export async function POST(req: NextRequest) {
     });
 
     return NextResponse.json({ url: session.url });
-  } catch (err: any) {
-    console.error('Erreur Stripe :', err.message);
-    return NextResponse.json({ error: err.message }, { status: err.statusCode || 500 });
+  } catch (err: unknown) {
+    if (err instanceof Error) {
+      console.error('Erreur Stripe :', err.message);
+      return NextResponse.json({ error: err.message }, { status: 500 });
+    }
+    // Si l'erreur n'est pas de type Error, on peut gérer ce cas aussi
+    console.error('Erreur Stripe inconnue');
+    return NextResponse.json({ error: 'Erreur inconnue' }, { status: 500 });
   }
-}
+}  
