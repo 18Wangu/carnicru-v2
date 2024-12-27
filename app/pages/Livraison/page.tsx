@@ -4,7 +4,6 @@ import { CodePromo } from '@/components/CodePromo';
 import { useState } from 'react';
 import { montserratFont } from '../../fonts/font';
 import Image from 'next/image';
-import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 
 const FormulaireLivraison = () => {
@@ -19,10 +18,36 @@ const FormulaireLivraison = () => {
   });
   const [parcelDetails] = useState({ service: '0', productCode: '6A', as: 'A02', weight: 3 });
   const [label, setLabel] = useState('');
-
-  //recuperer le prix de ResultatPortion
   const searchParams = useSearchParams();
-  const prix = searchParams.get("prix");
+  const prix = searchParams.get("prix"); // Récupère le prix depuis l'URL
+
+  const handleSubmitPrix = async () => {
+    try {
+      if (!prix) {
+        alert('Prix non défini ou incorrect.');
+        return;
+      }
+
+      const response = await fetch('/api/createCheckoutSession', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ prix }), // Envoie le prix récupéré à l'API
+      });
+
+      const data = await response.json();
+
+      if (data.url) {
+        // Redirige vers Stripe Checkout
+        window.location.href = data.url;
+      } else {
+        console.error('Erreur lors de la création de la session de paiement :', data.error);
+      }
+    } catch (error) {
+      console.error('Erreur lors du paiement Stripe :', error);
+    }
+  };
 
   const handleSubmit = async () => {
     const response = await fetch('/api', {
@@ -39,26 +64,6 @@ const FormulaireLivraison = () => {
       setLabel(data.label); // Affichez ou téléchargez l'étiquette
     } else {
       console.error(data.message);
-    }
-  };
-
-  const handleSubmitPrix = async () => {
-    // Envoie du prix récupéré et des détails à l'API pour créer une session Stripe
-    const response = await fetch('/api/createCheckoutSession', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ prix }), // Envoie le prix récupéré
-    });
-
-    const data = await response.json();
-
-    if (data.url) {
-      // Redirige l'utilisateur vers l'URL de paiement dynamique Stripe
-      window.location.href = data.url;
-    } else {
-      console.error('Erreur lors de la création de la session de paiement');
     }
   };
 
@@ -123,25 +128,31 @@ const FormulaireLivraison = () => {
                 className={`text-[#009874] text-xl bg-[#B0D8C1] placeholder:text-[#009874] placeholder:opacity-75 rounded-xl w-[700px] h-12 pl-4 my-2 focus:outline-none focus:ring-2 focus:ring-[#009874] ${montserratFont.className}`}
               />
             </div>
-            {/* Je souhaite payer avec stripe, pour cela stripe doit me faire un payment du montant = {prix} que j'ai recuperer de la page precedente */}
-            <Link href='https://buy.stripe.com/test_3cs9Ew5xy9HA0dWbIK'>
-              <button className='bg-[#E30613] text-white text-xl rounded-xl py-3 px-8 mt-4'>
-                Enregistrer
-              </button>
-            </Link>
-            <button onClick={handleSubmit} className='bg-black text-white'>Base64</button>
+            
+            {/* Bouton pour Stripe */}
+            <button
+              onClick={handleSubmitPrix}
+              className='bg-[#E30613] text-white text-xl rounded-xl py-3 px-8 mt-4'
+            >
+              Payer {prix ? `${prix} €` : ''}
+            </button>
+
+            {/* 
+            <button onClick={handleSubmit} className='bg-black text-white mt-4'>
+              Générer une étiquette
+            </button>
+            */}
           </form>
-          <Image 
-            src='/camion-livraison.svg' 
-            alt='camion livraison viande carnicru' 
-            width={200} 
-            height={200} 
+          <Image
+            src='/camion-livraison.svg'
+            alt='camion livraison viande carnicru'
+            width={200}
+            height={200}
             className="absolute bottom-5 right-48"
           />
         </div>
 
-        {/* Pour visioner la requete post envoyé - trouver un moyen de l'envoyer par mail a sitealacarte49@gmail.com a chaque fois qu'un client rentre les informations de livraison
-          En revanche attendre que le client est validé le payment, trouver un system où il faut attendre la confirmation du payment pour imprimer l'etiquette pour envoyer la livraison */}
+        {/* Envoyer ce label par mail grace a resend */}
         {label && (
           <div>
             <h2 className='text-green-500'>Étiquette générée</h2>
