@@ -21,7 +21,7 @@ export async function POST(request: Request) {
 
   // Ajout de 4 jours à la date actuelle - a ajuster avec Johan (je ne connais pas les dates de peremption)
   const datePeremption = new Date(currentDate);
-  datePeremption.setDate(currentDate.getDate() + 4);
+  datePeremption.setDate(currentDate.getDate() + 5);
 
   // Formatage de la date en YYYY-MM-DD
   const expirationDate = datePeremption.toISOString().split('T')[0];

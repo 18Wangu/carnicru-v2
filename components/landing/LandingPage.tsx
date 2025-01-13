@@ -11,7 +11,7 @@ export function LandingPage() {
         <CodePromo />
       </div>
 
-      <section className="m-3 h-[calc(100vh-18.5rem)]">
+      <section className="m-3 md:h-[calc(100vh-18.5rem)]">
         <div>
           <NosServices />
         </div>     

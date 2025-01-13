@@ -3,8 +3,8 @@ import Link from 'next/link';
 
 export function LinkInformations() {
   return (
-    <section className="flex flex-col lg:flex-row w-full">
-        <article className="flex items-center flex-1 bg-[#149A77] rounded-3xl mr-4">
+    <section className="flex flex-col lg:flex-row w-full gap-3 lg:gap-0">
+        <article className="flex items-center flex-1 bg-[#149A77] rounded-3xl mr-4 w-full">
         <Link href="/pages/QuiSommesNous" className='flex justify-between items-center w-full'>
             <h1 className="text-[#F8F9E9] ml-7 text-2xl">Qui sommes <br /> nous ?</h1>
             <Image
@@ -12,11 +12,11 @@ export function LinkInformations() {
               alt="Croquette"
               width={75}
               height={75}
-              className='mr-7'
+              className='mr-7 my-8 lg:my-0'
             />
           </Link>
         </article>
-        <article className="flex-1 bg-[#B0D8C1] rounded-3xl mr-4">
+        <article className="flex-1 bg-[#B0D8C1] rounded-3xl mr-4 w-full">
           <Link href="/pages/PageIndisponible" className='flex justify-between items-center'>
             <h1 className="text-[#004339] ml-7 text-2xl">Infos <br /> Pratiques</h1>
             <Image
@@ -28,7 +28,7 @@ export function LinkInformations() {
             />
           </Link>
         </article>
-        <article className="flex justify-between items-center flex-1 bg-[#B9110F] rounded-3xl mr-4">
+        <article className="flex justify-between items-center flex-1 bg-[#B9110F] rounded-3xl mr-4 w-full">
           <Link href="/pages/Barf" className='flex justify-between items-center w-full'>
             <h1 className="text-[#F8F9E9] ml-7 text-2xl">Le BARF <br /> en bref !</h1>
             <Image
@@ -36,11 +36,11 @@ export function LinkInformations() {
               alt="boucle"
               width={75}
               height={75}
-              className='mr-7'
+              className='mr-7 my-10 lg:my-0'
             />
           </Link>
         </article>
-        <article className="flex justify-between items-center flex-1 bg-[#149A77] rounded-3xl">
+        <article className="flex justify-between items-center flex-1 bg-[#149A77] rounded-3xl w-full">
           <Link href="/pages/PageIndisponible" className='flex justify-between items-center w-full'>
             <h1 className="text-[#F8F9E9] ml-7 text-2xl">Jouets <br /> & Goodies</h1>
             <Image
@@ -48,7 +48,7 @@ export function LinkInformations() {
               alt="Infos Pratiques"
               width={75}
               height={75}
-              className='mr-7'
+              className='mr-7 my-8 lg:my-0'
             />
           </Link>
         </article>
