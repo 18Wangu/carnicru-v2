@@ -17,7 +17,7 @@ export function Footer() {
         <div className="flex flex-col justify-between">
             <h3>Nous contacter</h3>
                 <p className={montserratFont.className}>numéro : 0676786534</p>
-                <p className={montserratFont.className}>mai : carnicru.contact@gmail.com</p>
+                <p className={montserratFont.className}>mai : carnicru@outlook.fr</p>
         </div>
         <div className="flex flex-col justify-between">
             <h3>Nous découvrir</h3>
