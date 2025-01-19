@@ -110,7 +110,7 @@ const Page = () => {
                     alt="Chien et chat"
                     width={200}
                     height={500}
-                    className="absolute bottom-[490px] md:bottom-52 -right-6 md:right-24 rotate-180 w-28 md:w-52"
+                    className="absolute bottom-[490px] md:bottom-52 right-0 md:right-24 rotate-180 w-28 md:w-52"
                 />
             </div>
             <Footer />
