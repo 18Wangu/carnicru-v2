@@ -58,11 +58,13 @@ const FormulaireLivraison = () => {
   };
   */}
   
+  {/* 
   const extractPdfLabel = (data: string) => {
     const regex = /<pdfEtiquette>([\s\S]*?)<\/pdfEtiquette>/; // Utilisation de 's' pour gérer les retours à la ligne
     const match = data.match(regex);
     return match ? match[1] : ''; // Renvoie la portion entre les balises, ou une chaîne vide si rien n'est trouvé
   };
+  */}
   
   
   const handleSubmitPrix = async () => {
