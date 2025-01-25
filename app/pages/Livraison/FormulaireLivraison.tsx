@@ -85,7 +85,7 @@ const FormulaireLivraison = () => {
         const labelGenerated = dataLabel.label;
 
         // Extraction de la partie entre <pdfEtiquette> et </pdfEtiquette>
-        const extractedLabel = extractPdfLabel(labelGenerated);
+        //const extractedLabel = extractPdfLabel(labelGenerated);
 
         // Étape 2 : Envoyer l'étiquette par e-mail
         const emailResponse = await fetch('/api/send-email', {
