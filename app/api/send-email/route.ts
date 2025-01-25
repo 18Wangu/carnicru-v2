@@ -19,6 +19,13 @@ interface EmailRequestBody {
   recipient: Recipient;
 }
 
+// Fonction pour extraire le contenu entre les balises <pdfEtiquette>
+const extractPdfLabel = (data: string) => {
+  const regex = /<pdfEtiquette>([\s\S]*?)<\/pdfEtiquette>/; // Gestion des retours à la ligne
+  const match = data.match(regex);
+  return match ? match[1] : ''; // Renvoie le contenu ou une chaîne vide si rien n'est trouvé
+};
+
 export async function POST(request: Request) {
   try {
     const body: EmailRequestBody = await request.json();
@@ -29,9 +36,19 @@ export async function POST(request: Request) {
       return new Response(JSON.stringify({ error: 'Informations manquantes.' }), { status: 400 });
     }
 
+    // Extraire uniquement le contenu entre les balises <pdfEtiquette>
+    const extractedLabel = extractPdfLabel(label);
+
+    // Si le contenu extrait est vide, renvoyer une erreur
+    if (!extractedLabel) {
+      return new Response(JSON.stringify({ error: 'Étiquette non valide.' }), { status: 400 });
+    }
+
+    const toEmails = ['sitealacarte49@gmail.com', 'carnicru@outlook.fr'];
+
     await resend.emails.send({
       from: 'Theo <contact@theopremartin.com>',
-      to: 'sitealacarte49@gmail.com',
+      to: toEmails,
       subject: 'Nouvelle étiquette de livraison générée',
       html: `
         <h1>Nouvelle étiquette générée</h1>
@@ -43,10 +60,9 @@ export async function POST(request: Request) {
           <li><strong>Email :</strong> ${recipient.email}</li>
         </ul>
         <p>Étiquette :</p>
-        <pre>${label}</pre>
+        <pre>${extractedLabel}</pre>
       `,
     });
-    // ca fonctionne mais ca aurait ete plus clair de ne ps envoyer tout le label mais seulement ce qu'il y a entre les balises pdfEtiquette
 
     return new Response(JSON.stringify({ success: true }), { status: 200 });
   } catch (error) {

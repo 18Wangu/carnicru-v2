@@ -34,11 +34,11 @@ const FormulaireLivraison = () => {
     country: 'FR',
   });
   const [parcelDetails] = useState<ParcelDetails>({ service: '0', productCode: '6A', as: 'A02', weight: 3 });
-  const [label, setLabel] = useState<string>('');
+  //const [label, setLabel] = useState<string>('');
   const searchParams = useSearchParams();
   const prix = searchParams.get("prix"); // Récupère le prix depuis l'URL
 
-  
+  {/*
   const handleSubmit = async () => {
     const response = await fetch('/api', {
       method: 'POST',
@@ -55,6 +55,13 @@ const FormulaireLivraison = () => {
     } else {
       console.error(data.message);
     }
+  };
+  */}
+  
+  const extractPdfLabel = (data: string) => {
+    const regex = /<pdfEtiquette>([\s\S]*?)<\/pdfEtiquette>/; // Utilisation de 's' pour gérer les retours à la ligne
+    const match = data.match(regex);
+    return match ? match[1] : ''; // Renvoie la portion entre les balises, ou une chaîne vide si rien n'est trouvé
   };
   
   
@@ -76,6 +83,9 @@ const FormulaireLivraison = () => {
 
       if (dataLabel.success) {
         const labelGenerated = dataLabel.label;
+
+        // Extraction de la partie entre <pdfEtiquette> et </pdfEtiquette>
+        const extractedLabel = extractPdfLabel(labelGenerated);
 
         // Étape 2 : Envoyer l'étiquette par e-mail
         const emailResponse = await fetch('/api/send-email', {
@@ -180,10 +190,11 @@ const FormulaireLivraison = () => {
               Payer {prix ? `${prix}` : ''}
             </button>
 
-            
+            {/* 
             <button onClick={handleSubmit} className='bg-black text-white mt-4'>
               Générer une étiquette
             </button>
+            */}
             
           </form>
           <Image
@@ -197,12 +208,15 @@ const FormulaireLivraison = () => {
 
         {/* Envoyer ce label par mail grace a resend */}
         
+        {/*
         {label && (
           <div>
             <h2 className='text-green-500'>Étiquette générée</h2>
             <pre className='w-96 text-blue-800'>{label}</pre>
+            <pre className='w-96 text-red-800'>{extractPdfLabel(label)}</pre>
           </div>
         )}
+        */}
       </div>
     </div>
   );
