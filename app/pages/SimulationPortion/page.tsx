@@ -11,12 +11,14 @@ const Formulaire = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState({
     nomChien: "",
+    race: "",
     sexe: "",
     poids: "",
     activite: "",
     corpulence: "",
     sterilise: "",
   });
+  const [errorMessage, setErrorMessage] = useState("");
 
   // calcul des portions
   const proportions = {
@@ -46,7 +48,36 @@ const Formulaire = () => {
   };
 
   const goToNextStep = () => {
-    if (currentStep < 7) setCurrentStep(currentStep + 1);
+    if (currentStep === 1 && formData.nomChien.trim() === "") {
+      setErrorMessage("Veuillez indiquer le nom de votre chien");
+      return; // Reste sur l'étape 1
+    }
+    if (currentStep === 2 && formData.race.trim() === "") {
+      setErrorMessage("Veuillez indiquer la race de votre chien");
+      return; // Reste sur l'étape 2
+    }
+    if (currentStep === 3 && formData.sexe.trim() === "") {
+      setErrorMessage("Veuillez sélectionner le sexe de votre chien");
+      return; // Reste sur l'étape 3
+    }
+    if (currentStep === 4 && formData.poids.trim() === "") {
+      setErrorMessage("Veuillez indiquer le poids de votre chien");
+      return; // Reste sur l'étape 4
+    }
+    if (currentStep === 5 && formData.activite.trim() === "") {
+      setErrorMessage("Veuillez sélectionner le niveau d'activité de votre chien");
+      return; // Reste sur l'étape 5
+    }
+    if (currentStep === 6 && formData.corpulence.trim() === "") {
+      setErrorMessage("Veuillez sélectionner la corpulence de votre chien");
+      return; // Reste sur l'étape 6
+    }
+    if (currentStep === 7 && formData.sterilise.trim() === "") {
+      setErrorMessage("Veuillez indiquer si votre chien est stérilisé");
+      return; // Reste sur l'étape 7
+    }
+    if (currentStep < 8) setCurrentStep(currentStep + 1);
+    setErrorMessage(""); // Réinitialise le message d'erreur si le champ est valide
   };
 
   const goToPreviousStep = () => {
@@ -82,6 +113,7 @@ const Formulaire = () => {
                 placeholder="Entrer son nom ici ..."
                 className="w-auto text-2xl p-2 rounded-3xl border-none focus:outline-none text-center text-[#004339]"
               />
+              {errorMessage && <p className="text-[#E30613] mt-2">{errorMessage}</p>}
             </div>
             <button
               onClick={goToNextStep}
@@ -95,23 +127,29 @@ const Formulaire = () => {
         {/* Étape 2 */}
         {currentStep === 2 && (
           <>
-            <h2 className="text-3xl font-bold mb-4 text-center">Son sexe :</h2>
-            <div className="flex flex-col gap-3 text-2xl">
-              <button
-                onClick={() => setFormData((prev) => ({ ...prev, sexe: "mâle" }))}
-                className={`py-2 px-4 rounded-3xl font-bold bg-[#E30613] focus:outline-none focus:ring-2 focus:ring-[#E30613] focus:ring-offset-2`}
-              >
-                Mâle
-              </button>
-              <button
-                onClick={() => setFormData((prev) => ({ ...prev, sexe: "femelle" }))}
-                className={`py-2 px-4 rounded-3xl font-bold bg-[#E30613] focus:outline-none focus:ring-2 focus:ring-[#E30613] focus:ring-offset-2`}
-              >
-                Femelle
-              </button>
+            <div className="absolute inset-0 z-0">
+              <Image
+                src="/coeur-vert.svg"
+                alt="coeur"
+                width={500}
+                height={500}
+                className="absolute bottom-0 right-0 opacity-75"
+              />
             </div>
-            <div className="flex justify-between">             
+
+            <div className="flex flex-col items-center justify-center relative z-10">
+              <label className="block text-3xl text-center my-12">La race de mon chien :</label>
+              <input
+                type="text"
+                name="race"
+                value={formData.race}
+                onChange={handleInputChange}
+                placeholder="Entrer sa race ici ..."
+                className="w-auto text-2xl p-2 rounded-3xl border-none focus:outline-none text-center text-[#004339]"
+              />
+              {errorMessage && currentStep === 2 && <p className="text-[#E30613] mt-2">{errorMessage}</p>}
             </div>
+
             <button
               onClick={goToPreviousStep}
               className="bg-[#F8F9E9] text-[#004339] font-bold py-2 px-4 rounded-3xl w-auto absolute bottom-5 left-5 text-2xl"
@@ -130,18 +168,32 @@ const Formulaire = () => {
         {/* Étape 3 */}
         {currentStep === 3 && (
           <>
-            <h2 className="text-3xl font-bold mb-4 text-center">Son poids :</h2>
-            <div className="flex justify-center items-center mb-6">
-              <input
-                type="number"
-                name="poids"
-                value={formData.poids}
-                onChange={handleInputChange}
-                placeholder="Entrer le poids (kg)"
-                className="text-center text-[#004339] py-2 px-4 rounded-3xl w-auto"
+            <div className="absolute inset-0 z-0">
+              <Image
+                src="/fleche-simulation.svg"
+                alt="fleche"
+                width={500}
+                height={500}
+                className="absolute top-0 right-0 opacity-75"
               />
-              <span className="ml-2 text-3xl">kg</span>
             </div>
+
+            <h2 className="text-3xl font-bold mb-4 text-center">Son sexe :</h2>
+            <div className="flex flex-col gap-3 text-2xl z-10">
+              <button
+                onClick={() => setFormData((prev) => ({ ...prev, sexe: "mâle" }))}
+                className={`py-2 px-4 rounded-3xl font-bold bg-[#E30613] focus:outline-none focus:ring-2 focus:ring-[#E30613] focus:ring-offset-2`}
+              >
+                Mâle
+              </button>
+              <button
+                onClick={() => setFormData((prev) => ({ ...prev, sexe: "femelle" }))}
+                className={`py-2 px-4 rounded-3xl font-bold bg-[#E30613] focus:outline-none focus:ring-2 focus:ring-[#E30613] focus:ring-offset-2`}
+              >
+                Femelle
+              </button>
+            </div>
+            {errorMessage && currentStep === 3 && <p className="text-[#E30613] mt-2">{errorMessage}</p>}
             <button
               onClick={goToPreviousStep}
               className="bg-[#F8F9E9] text-[#004339] font-bold py-2 px-4 rounded-3xl w-auto absolute bottom-5 left-5 text-2xl"
@@ -160,18 +212,29 @@ const Formulaire = () => {
         {/* Étape 4 */}
         {currentStep === 4 && (
           <>
-            <h2 className="text-3xl font-bold mb-4 text-center">Niveau d&aposactivité :</h2>
-            <div className="flex gap-3 text-2xl">
-              {["Canapé", "Actif", "Sportif"].map((level) => (
-                <button
-                  key={level}
-                  onClick={() => setFormData((prev) => ({ ...prev, activite: level }))}
-                  className={`py-2 px-4 rounded-3xl font-bold bg-[#E30613] focus:outline-none focus:ring-2 focus:ring-[#E30613] focus:ring-offset-2`}
-                >
-                  {level}
-                </button>
-              ))}
+            <div className="absolute inset-0 z-0">
+              <Image
+                src="/feuille.svg"
+                alt="feuille"
+                width={500}
+                height={500}
+                className="absolute bottom-0 right-0 opacity-75"
+              />
             </div>
+            
+            <h2 className="text-3xl font-bold mb-4 text-center">Son poids :</h2>
+            <div className="flex justify-center items-center mb-6 z-10">
+              <input
+                type="number"
+                name="poids"
+                value={formData.poids}
+                onChange={handleInputChange}
+                placeholder="Entrer le poids (kg)"
+                className="text-center text-[#004339] py-2 px-4 rounded-3xl w-auto"
+              />
+              <span className="ml-2 text-3xl z-10">kg</span>
+            </div>
+            {errorMessage && currentStep === 4 && <p className="text-[#E30613] mt-2 text-center z-10">{errorMessage}</p>}
             <button
               onClick={goToPreviousStep}
               className="bg-[#F8F9E9] text-[#004339] font-bold py-2 px-4 rounded-3xl w-auto absolute bottom-5 left-5 text-2xl"
@@ -190,18 +253,29 @@ const Formulaire = () => {
         {/* Étape 5 */}
         {currentStep === 5 && (
           <>
-            <h2 className="text-3xl font-bold mb-4 text-center">Corpulence :</h2>
-            <div className="flex gap-3 text-2xl">
-              {["Maigre", "Normal", "Surpoids"].map((type) => (
+            <div className="absolute inset-0 z-0">
+              <Image
+                src="/coeur-vert.svg"
+                alt="coeur"
+                width={500}
+                height={500}
+                className="absolute bottom-0 right-0 opacity-75"
+              />
+            </div>
+
+            <h2 className="text-3xl font-bold mb-4 text-center">Niveau d&apos;activité :</h2>
+            <div className="flex gap-3 text-2xl z-10">
+              {["Canapé", "Actif", "Sportif"].map((level) => (
                 <button
-                  key={type}
-                  onClick={() => setFormData((prev) => ({ ...prev, corpulence: type }))}
+                  key={level}
+                  onClick={() => setFormData((prev) => ({ ...prev, activite: level }))}
                   className={`py-2 px-4 rounded-3xl font-bold bg-[#E30613] focus:outline-none focus:ring-2 focus:ring-[#E30613] focus:ring-offset-2`}
                 >
-                  {type}
+                  {level}
                 </button>
               ))}
             </div>
+            {errorMessage && currentStep === 5 && <p className="text-[#E30613] mt-2">{errorMessage}</p>}
             <button
               onClick={goToPreviousStep}
               className="bg-[#F8F9E9] text-[#004339] font-bold py-2 px-4 rounded-3xl w-auto absolute bottom-5 left-5 text-2xl"
@@ -220,21 +294,29 @@ const Formulaire = () => {
         {/* Étape 6 */}
         {currentStep === 6 && (
           <>
-            <h2 className="text-3xl font-bold mb-4 text-center">Votre chien est-il stérilisé ?</h2>
-            <div className="flex gap-3 text-2xl">
-              <button
-                onClick={() => setFormData((prev) => ({ ...prev, sterilise: "oui" }))}
-                className={`py-2 px-4 rounded-3xl font-bold bg-[#E30613] focus:outline-none focus:ring-2 focus:ring-[#E30613] focus:ring-offset-2`}
-              >
-                Oui
-              </button>
-              <button
-                onClick={() => setFormData((prev) => ({ ...prev, sterilise: "non" }))}
-                className={`py-2 px-4 rounded-3xl font-bold bg-[#E30613] focus:outline-none focus:ring-2 focus:ring-[#E30613] focus:ring-offset-2`}
-              >
-                Non
-              </button>
+            <div className="absolute inset-0 z-0">
+              <Image
+                src="/fleche-simulation.svg"
+                alt="fleche"
+                width={500}
+                height={500}
+                className="absolute top-0 right-0 opacity-75"
+              />
             </div>
+
+            <h2 className="text-3xl font-bold mb-4 text-center">Corpulence :</h2>
+            <div className="flex gap-3 text-2xl z-10">
+              {["Maigre", "Normal", "Surpoids"].map((type) => (
+                <button
+                  key={type}
+                  onClick={() => setFormData((prev) => ({ ...prev, corpulence: type }))}
+                  className={`py-2 px-4 rounded-3xl font-bold bg-[#E30613] focus:outline-none focus:ring-2 focus:ring-[#E30613] focus:ring-offset-2`}
+                >
+                  {type}
+                </button>
+              ))}
+            </div>
+            {errorMessage && currentStep === 6 && <p className="text-[#E30613] mt-2">{errorMessage}</p>}
             <button
               onClick={goToPreviousStep}
               className="bg-[#F8F9E9] text-[#004339] font-bold py-2 px-4 rounded-3xl w-auto absolute bottom-5 left-5 text-2xl"
@@ -252,6 +334,50 @@ const Formulaire = () => {
 
         {/* Étape 7 */}
         {currentStep === 7 && (
+          <>
+            <div className="absolute inset-0 z-0">
+              <Image
+                src="/coeur-vert.svg"
+                alt="coeur"
+                width={500}
+                height={500}
+                className="absolute bottom-0 right-0 opacity-75"
+              />
+            </div>
+
+            <h2 className="text-3xl font-bold mb-4 text-center z-10">Votre chien est-il stérilisé ?</h2>
+            <div className="flex gap-3 text-2xl z-10">
+              <button
+                onClick={() => setFormData((prev) => ({ ...prev, sterilise: "oui" }))}
+                className={`py-2 px-4 rounded-3xl font-bold bg-[#E30613] focus:outline-none focus:ring-2 focus:ring-[#E30613] focus:ring-offset-2`}
+              >
+                Oui
+              </button>
+              <button
+                onClick={() => setFormData((prev) => ({ ...prev, sterilise: "non" }))}
+                className={`py-2 px-4 rounded-3xl font-bold bg-[#E30613] focus:outline-none focus:ring-2 focus:ring-[#E30613] focus:ring-offset-2`}
+              >
+                Non
+              </button>
+            </div>
+            {errorMessage && currentStep === 7 && <p className="text-[#E30613] mt-2">{errorMessage}</p>}
+            <button
+              onClick={goToPreviousStep}
+              className="bg-[#F8F9E9] text-[#004339] font-bold py-2 px-4 rounded-3xl w-auto absolute bottom-5 left-5 text-2xl"
+            >
+              Précédent
+            </button>
+            <button
+              onClick={goToNextStep}
+              className="bg-[#B0D8C1] text-[#004339] font-bold py-2 px-4 rounded-3xl w-auto absolute bottom-5 right-5 text-2xl"
+            >
+              Suivant
+            </button>
+          </>
+        )}
+
+        {/* Étape 8 */}
+        {currentStep === 8 && (
           <>
             <h2 className="text-3xl font-bold mb-4 text-center">Résumé des informations :</h2>
             <ul className="bg-[#B0D8C1] p-5 rounded-3xl mb-6">
@@ -272,6 +398,7 @@ const Formulaire = () => {
                 pathname: "/pages/ResultatPortion",
                 query: { 
                   nomChien: formData.nomChien,
+                  race: formData.race,
                   portion: (() => {
                     const { activite, corpulence, sterilise, poids } = formData;
 
@@ -303,11 +430,11 @@ const Formulaire = () => {
 
         {/* Barre de progression */}
         <div className="mt-4">
-        <p className="text-[#149A77] text-center text-xl mb-3">{currentStep === 7 ? "Simulation terminé" : `${7 - currentStep} questions restantes`}</p>
+        <p className="text-[#149A77] text-center text-xl mb-3">{currentStep === 8 ? "Simulation terminé" : `${8 - currentStep} questions restantes`}</p>
           <div className="border-2 border-[#149A77] h-4 rounded-full overflow-hidden w-96">
             <div
               className="bg-[#004339] h-full"
-              style={{ width: `${(currentStep / 7) * 100}%` }}
+              style={{ width: `${(currentStep / 8) * 100}%` }}
             ></div>
           </div>
         </div>
