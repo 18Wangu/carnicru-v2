@@ -3,10 +3,10 @@ import Link from 'next/link';
 
 export function NosServices() {
     return (
-        <div className='flex flex-col md:flex-row md:h-[calc(100vh-26.5rem)]'>
+        <div className='flex flex-col md:flex-row md:h-[calc(100vh-22.5rem)]'>
             {/* Rendre la partie simuler mon compagnon responsive */}
             <Link href="/pages/SimulationPortion">
-                <div className="md:w-[calc(100vw-35rem)] xl:w-[calc(100vw-53rem)] bg-[#E30613] rounded-3xl h-96 md:h-[calc(100vh-27.5rem)] mr-0 md:mr-3 relative flex flex-col justify-center items-center overflow-hidden">
+                <div className="md:w-[calc(100vw-35rem)] xl:w-[calc(100vw-53rem)] bg-[#E30613] rounded-3xl h-96 md:h-[calc(100vh-23.5rem)] mr-0 md:mr-3 relative flex flex-col justify-center items-center overflow-hidden">
                     <Image
                         src="/ying-rouge.svg"
                         alt='croquette'
@@ -31,7 +31,7 @@ export function NosServices() {
                 alt="Chien qui mange de la viande"
                 width={850}
                 height={400}
-                className="rounded-3xl mb-3 md:h-[calc(100vh-27.5rem)] object-cover mt-3 md:mt-0"
+                className="rounded-3xl mb-3 md:h-[calc(100vh-23.5rem)] object-cover mt-3 md:mt-0"
                 />
             </div>
         </div>

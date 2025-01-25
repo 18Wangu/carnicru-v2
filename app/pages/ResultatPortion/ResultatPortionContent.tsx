@@ -6,7 +6,7 @@ import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { Footer } from "@/components/Footer";
-import { CodePromo } from "@/components/CodePromo";
+//import { CodePromo } from "@/components/CodePromo";
 
 const ResultatPortionContent: React.FC = () => {
   const searchParams = useSearchParams();
@@ -76,9 +76,9 @@ const ResultatPortionContent: React.FC = () => {
 
   return (
     <div>
-      <CodePromo />
+      {/*<CodePromo />*/}
       <div className="flex flex-col items-center font-semibold my-20">
-        <Link href="/pages/SimulationPortion" className='absolute top-40 left-12 text-[#004339] text-xl hover:underline hover:underline-offset-4'>
+        <Link href="/pages/SimulationPortion" className='absolute top-32 left-12 text-[#004339] text-xl hover:underline hover:underline-offset-4'>
           <span>Retour</span>
         </Link>
         {/* Portion Details */}
@@ -112,8 +112,8 @@ const ResultatPortionContent: React.FC = () => {
               <div className="text-2xl text-center text-[#004339]">Dans cette portion, il y aura :</div>
               <div className="flex flex-col mt-12 text-xl max-md:mt-10">
                 <div className="text-[#B9110F]">60% de viande crue</div>
-                <div className="mt-4 text-[#149A77]">30% d&apos;os broyés</div>
-                <div className="mt-4 text-[#004339]">10% d&apos;abats</div>
+                <div className="mt-4 text-[#149A77]">30% d&apos;os charnus</div>
+                <div className="mt-4 text-[#004339]">10% d&apos;abats et mix légumes</div>
               </div>
             </div>
           </div>

@@ -18,7 +18,7 @@ const NavLink: React.FC<NavLinkProps> = ({ label, href, setIsMenuOpen }) => (
 
 const NavigationBar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const navLinks = ["Home", "About", "Contact"];
+  const navLinks = ["Accueil", "Contact"];
 
   return (
     <nav className="flex relative justify-between items-center px-12 py-9 w-full min-h-[103px] max-md:px-5 max-md:max-w-full">
@@ -33,7 +33,7 @@ const NavigationBar: React.FC = () => {
         ))}
       </div>
       <div className="flex absolute right-4 max-md:flex max-md:items-center">
-        <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="text-2xl">
+        <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="text-2xl block md:hidden">
           {isMenuOpen ? '✖' : '☰'}
         </button>
       </div>

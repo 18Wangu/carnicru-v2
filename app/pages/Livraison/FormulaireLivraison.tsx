@@ -1,6 +1,6 @@
 'use client';
 
-import { CodePromo } from '@/components/CodePromo';
+//import { CodePromo } from '@/components/CodePromo';
 import { useState } from 'react';
 import { montserratFont } from '../../fonts/font';
 import Image from 'next/image';
@@ -34,11 +34,11 @@ const FormulaireLivraison = () => {
     country: 'FR',
   });
   const [parcelDetails] = useState<ParcelDetails>({ service: '0', productCode: '6A', as: 'A02', weight: 3 });
-  // const [label, setLabel] = useState<string>('');
+  const [label, setLabel] = useState<string>('');
   const searchParams = useSearchParams();
   const prix = searchParams.get("prix"); // Récupère le prix depuis l'URL
 
-  {/*
+  
   const handleSubmit = async () => {
     const response = await fetch('/api', {
       method: 'POST',
@@ -56,7 +56,7 @@ const FormulaireLivraison = () => {
       console.error(data.message);
     }
   };
-  */}
+  
   
   const handleSubmitPrix = async () => {
     try {
@@ -112,7 +112,7 @@ const FormulaireLivraison = () => {
 
   return (
     <div>
-      <CodePromo />
+      {/*<CodePromo />*/}
       <div className='flex flex-col justify-center items-center h-[calc(100vh-9rem)] relative'>
         <div>
           <h1 className='text-4xl mb-5 text-[#004339]'>Formulaire de livraison</h1>
@@ -180,11 +180,11 @@ const FormulaireLivraison = () => {
               Payer {prix ? `${prix}` : ''}
             </button>
 
-            {/* 
+            
             <button onClick={handleSubmit} className='bg-black text-white mt-4'>
               Générer une étiquette
             </button>
-            */}
+            
           </form>
           <Image
             src='/camion-livraison.svg'
@@ -196,13 +196,13 @@ const FormulaireLivraison = () => {
         </div>
 
         {/* Envoyer ce label par mail grace a resend */}
-        {/*
+        
         {label && (
           <div>
             <h2 className='text-green-500'>Étiquette générée</h2>
             <pre className='w-96 text-blue-800'>{label}</pre>
           </div>
-        )}*/}
+        )}
       </div>
     </div>
   );
