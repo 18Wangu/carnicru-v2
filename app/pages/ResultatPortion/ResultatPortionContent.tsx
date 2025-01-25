@@ -17,17 +17,17 @@ const ResultatPortionContent: React.FC = () => {
   const plans = [
     {
       title: "Formule semaine",
-      price: (portions * 0.0095 * 7).toFixed(2) + "€",
+      price: ((portions * 0.0095 * 7) + 20).toFixed(2) + "€",
       imageSrc: "/portion2.png",
     },
     {
       title: "Formule mensuelle",
-      price: ((portions * 0.0095 * 30) * 0.95).toFixed(2) + "€",
+      price: (((portions * 0.0095 * 28) * 0.95) + 20).toFixed(2) + "€",
       imageSrc: "/portion2.png",
     },
     {
       title: "Formule unité",
-      price: (portions * 0.0095).toFixed(2) + "€",
+      price: ((portions * 0.0095) + 20).toFixed(2) + "€",
       imageSrc: "/portion2.png",
     },
   ];
@@ -69,7 +69,10 @@ const ResultatPortionContent: React.FC = () => {
         >
           Choisir
         </Link>
-        <div className="flex gap-10 mt-5 min-h-[24px]" />
+        <div className="text-sm text-center text-[#004339] mt-2">
+          <em>dont 20€ de livraison déjà inclus dans le prix</em>
+        </div>
+        <div className="flex gap-10 mt-5 min-h-[0px]" />
       </div>
     </div>
   );
