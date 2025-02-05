@@ -68,7 +68,7 @@ const FormulaireLivraison = () => {
   */}
 
   const validateForm = () => {
-    let newErrors: { [key: string]: string } = {};
+    const newErrors: { [key: string]: string } = {};
     Object.entries(recipient).forEach(([key, value]) => {
       if (!value.trim()) {
         newErrors[key] = `Veuillez renseigner votre ${key === 'address1' ? 'adresse' : key == 'city' ? 'ville' : key === 'zipCode' ? 'code postal' : key === 'phone' ? 'numéro de téléphone' : key}.`;
@@ -171,16 +171,29 @@ const FormulaireLivraison = () => {
                   onChange={(e) => {
                     const value = e.target.value;
                     setRecipient({ ...recipient, [field]: value });
-
-                    // Suppression de l'erreur si le champ devient valide
+                  
+                    // Recalcul des erreurs après chaque modification
                     setErrors((prevErrors) => {
                       const newErrors = { ...prevErrors };
                       if (value.trim()) {
                         delete newErrors[field];
+                      } else {
+                        newErrors[field] = `Veuillez renseigner votre ${field}.`;
                       }
+                  
+                      // Vérifie le format du téléphone
+                      if (field === 'phone' && !/^\d{10}$/.test(value)) {
+                        newErrors.phone = 'Numéro de téléphone invalide.';
+                      }
+                  
+                      // Vérifie le format de l'email
+                      if (field === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+                        newErrors.email = 'Adresse e-mail invalide.';
+                      }
+                  
                       return newErrors;
                     });
-                  }}
+                  }}                  
                   className={`text-[#009874] text-xl bg-[#B0D8C1] placeholder:text-[#009874] placeholder:opacity-75 rounded-xl w-[700px] h-12 pl-4 my-2 focus:outline-none focus:ring-2 focus:ring-[#009874] ${montserratFont.className}`}
                 />
                 {errors[field] && <p className="text-red-600 text-sm">{errors[field]}</p>}
@@ -190,7 +203,9 @@ const FormulaireLivraison = () => {
             {/* Bouton pour Stripe */}
             <button
               onClick={handleSubmitPrix}
-              className="bg-[#E30613] text-white text-xl rounded-xl py-3 px-8 mt-4"
+              disabled={Object.keys(errors).length > 0} // Désactivé si erreurs
+              className={`bg-[#E30613] text-white text-xl rounded-xl py-3 px-8 mt-4 
+                          ${Object.keys(errors).length > 0 ? 'opacity-50 cursor-not-allowed' : ''}`}
             >
               Payer {prix ? `${prix}` : ''}
             </button>
