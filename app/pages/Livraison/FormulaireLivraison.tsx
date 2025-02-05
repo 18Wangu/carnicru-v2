@@ -37,8 +37,9 @@ const FormulaireLivraison = () => {
   //const [label, setLabel] = useState<string>('');
   const searchParams = useSearchParams();
   const prix = searchParams.get("prix"); // Récupère le prix depuis l'URL
+  const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
-  {/*
+  {/* 
   const handleSubmit = async () => {
     const response = await fetch('/api', {
       method: 'POST',
@@ -57,7 +58,7 @@ const FormulaireLivraison = () => {
     }
   };
   */}
-  
+
   {/* 
   const extractPdfLabel = (data: string) => {
     const regex = /<pdfEtiquette>([\s\S]*?)<\/pdfEtiquette>/; // Utilisation de 's' pour gérer les retours à la ligne
@@ -65,9 +66,34 @@ const FormulaireLivraison = () => {
     return match ? match[1] : ''; // Renvoie la portion entre les balises, ou une chaîne vide si rien n'est trouvé
   };
   */}
-  
-  
+
+  const validateForm = () => {
+    let newErrors: { [key: string]: string } = {};
+    Object.entries(recipient).forEach(([key, value]) => {
+      if (!value.trim()) {
+        newErrors[key] = `Veuillez renseigner votre ${key === 'address1' ? 'adresse' : key == 'city' ? 'ville' : key === 'zipCode' ? 'code postal' : key === 'phone' ? 'numéro de téléphone' : key}.`;
+      }
+    });
+
+    // Vérification du format du numéro de téléphone (10 chiffres, uniquement des nombres)
+    const phoneRegex = /^\d{10}$/;
+    if (!recipient.phone.match(phoneRegex)) {
+      newErrors.phone = 'Numéro de téléphone invalide.';
+    }
+
+    // Vérification du format de l'adresse e-mail
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!recipient.email.match(emailRegex)) {
+      newErrors.email = 'Adresse e-mail invalide.';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleSubmitPrix = async () => {
+    if (!validateForm()) return;
+
     try {
       if (!prix) {
         alert('Prix non défini ou incorrect.');
@@ -129,65 +155,42 @@ const FormulaireLivraison = () => {
         <div>
           <h1 className='text-4xl mb-5 text-[#004339]'>Formulaire de livraison</h1>
           <form onSubmit={(e) => e.preventDefault()}>
-            <div>
-              <input
-                type="text"
-                placeholder="Nom du destinataire"
-                value={recipient.name}
-                onChange={(e) => setRecipient({ ...recipient, name: e.target.value })}
-                className={`text-[#009874] text-xl bg-[#B0D8C1] placeholder:text-[#009874] placeholder:opacity-75 rounded-xl w-[700px] h-12 pl-4 my-2 focus:outline-none focus:ring-2 focus:ring-[#009874] ${montserratFont.className}`}
-              />
-            </div>
-            <div>
-              <input
-                type="text"
-                placeholder="Adresse"
-                value={recipient.address1}
-                onChange={(e) => setRecipient({ ...recipient, address1: e.target.value })}
-                className={`text-[#009874] text-xl bg-[#B0D8C1] placeholder:text-[#009874] placeholder:opacity-75 rounded-xl w-[700px] h-12 pl-4 my-2 focus:outline-none focus:ring-2 focus:ring-[#009874] ${montserratFont.className}`}
-              />
-            </div>
-            <div>
-              <input
-                type="text"
-                placeholder="Ville"
-                value={recipient.city}
-                onChange={(e) => setRecipient({ ...recipient, city: e.target.value })}
-                className={`text-[#009874] text-xl bg-[#B0D8C1] placeholder:text-[#009874] placeholder:opacity-75 rounded-xl w-[700px] h-12 pl-4 my-2 focus:outline-none focus:ring-2 focus:ring-[#009874] ${montserratFont.className}`}
-              />
-            </div>
-            <div>
-              <input
-                type="text"
-                placeholder="Code postal"
-                value={recipient.zipCode}
-                onChange={(e) => setRecipient({ ...recipient, zipCode: e.target.value })}
-                className={`text-[#009874] text-xl bg-[#B0D8C1] placeholder:text-[#009874] placeholder:opacity-75 rounded-xl w-[700px] h-12 pl-4 my-2 focus:outline-none focus:ring-2 focus:ring-[#009874] ${montserratFont.className}`}
-              />
-            </div>
-            <div>
-              <input
-                type="text"
-                placeholder="Numéro de téléphone"
-                value={recipient.phone}
-                onChange={(e) => setRecipient({ ...recipient, phone: e.target.value })}
-                className={`text-[#009874] text-xl bg-[#B0D8C1] placeholder:text-[#009874] placeholder:opacity-75 rounded-xl w-[700px] h-12 pl-4 my-2 focus:outline-none focus:ring-2 focus:ring-[#009874] ${montserratFont.className}`}
-              />
-            </div>
-            <div>
-              <input
-                type="email"
-                placeholder="Email"
-                value={recipient.email}
-                onChange={(e) => setRecipient({ ...recipient, email: e.target.value })}
-                className={`text-[#009874] text-xl bg-[#B0D8C1] placeholder:text-[#009874] placeholder:opacity-75 rounded-xl w-[700px] h-12 pl-4 my-2 focus:outline-none focus:ring-2 focus:ring-[#009874] ${montserratFont.className}`}
-              />
-            </div>
+            {[
+              { field: 'name', placeholder: 'Nom du destinataire' },
+              { field: 'address1', placeholder: 'Adresse' },
+              { field: 'city', placeholder: 'Ville' },
+              { field: 'zipCode', placeholder: 'Code postal' },
+              { field: 'phone', placeholder: 'Numéro de téléphone' },
+              { field: 'email', placeholder: 'Email', type: 'email' },
+            ].map(({ field, placeholder, type = 'text' }) => (
+              <div key={field}>
+                <input
+                  type={type}
+                  placeholder={placeholder}
+                  value={recipient[field as keyof Recipient]}
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    setRecipient({ ...recipient, [field]: value });
+
+                    // Suppression de l'erreur si le champ devient valide
+                    setErrors((prevErrors) => {
+                      const newErrors = { ...prevErrors };
+                      if (value.trim()) {
+                        delete newErrors[field];
+                      }
+                      return newErrors;
+                    });
+                  }}
+                  className={`text-[#009874] text-xl bg-[#B0D8C1] placeholder:text-[#009874] placeholder:opacity-75 rounded-xl w-[700px] h-12 pl-4 my-2 focus:outline-none focus:ring-2 focus:ring-[#009874] ${montserratFont.className}`}
+                />
+                {errors[field] && <p className="text-red-600 text-sm">{errors[field]}</p>}
+              </div>
+            ))}
             
             {/* Bouton pour Stripe */}
             <button
               onClick={handleSubmitPrix}
-              className='bg-[#E30613] text-white text-xl rounded-xl py-3 px-8 mt-4'
+              className="bg-[#E30613] text-white text-xl rounded-xl py-3 px-8 mt-4"
             >
               Payer {prix ? `${prix}` : ''}
             </button>
@@ -210,7 +213,7 @@ const FormulaireLivraison = () => {
 
         {/* Envoyer ce label par mail grace a resend */}
         
-        {/*
+        {/* 
         {label && (
           <div>
             <h2 className='text-green-500'>Étiquette générée</h2>
