@@ -271,7 +271,8 @@ const Formulaire = () => {
                 <button
                   key={level}
                   onClick={() => setFormData((prev) => ({ ...prev, activite: level }))}
-                  className={`py-1 px-2 md:py-2 md:px-4 rounded-3xl font-bold bg-[#E30613] focus:outline-none focus:ring-2 focus:ring-[#E30613] focus:ring-offset-2`}
+                  className={`py-1 px-2 md:py-2 md:px-4 rounded-3xl font-bold bg-[#E30613] focus:outline-none focus:ring-2 focus:ring-[#E30613] focus:ring-offset-2
+                    ${formData.activite === level ? "max-md:bg-red-700" : "bg-[#E30613]"}`}
                 >
                   {level}
                 </button>
@@ -312,7 +313,8 @@ const Formulaire = () => {
                 <button
                   key={type}
                   onClick={() => setFormData((prev) => ({ ...prev, corpulence: type }))}
-                  className={`py-1 px-2 md:py-2 md:px-4 rounded-3xl font-bold bg-[#E30613] focus:outline-none focus:ring-2 focus:ring-[#E30613] focus:ring-offset-2`}
+                  className={`py-1 px-2 md:py-2 md:px-4 rounded-3xl font-bold bg-[#E30613] focus:outline-none focus:ring-2 focus:ring-[#E30613] focus:ring-offset-2
+                    ${formData.corpulence === type ? "max-md:bg-red-700" : "bg-[#E30613]"}`}
                 >
                   {type}
                 </button>
@@ -351,13 +353,15 @@ const Formulaire = () => {
             <div className="flex gap-3 text-xl md:text-2xl z-10">
               <button
                 onClick={() => setFormData((prev) => ({ ...prev, sterilise: "oui" }))}
-                className={`py-1 px-2 md:py-2 md:px-4 rounded-3xl font-bold bg-[#E30613] focus:outline-none focus:ring-2 focus:ring-[#E30613] focus:ring-offset-2`}
+                className={`py-1 px-2 md:py-2 md:px-4 rounded-3xl font-bold bg-[#E30613] focus:outline-none focus:ring-2 focus:ring-[#E30613] focus:ring-offset-2
+                  ${formData.sterilise === "oui" ? "max-md:bg-red-700" : "bg-[#E30613]"}`}
               >
                 Oui
               </button>
               <button
                 onClick={() => setFormData((prev) => ({ ...prev, sterilise: "non" }))}
-                className={`py-1 px-2 md:py-2 md:px-4 rounded-3xl font-bold bg-[#E30613] focus:outline-none focus:ring-2 focus:ring-[#E30613] focus:ring-offset-2`}
+                className={`py-1 px-2 md:py-2 md:px-4 rounded-3xl font-bold bg-[#E30613] focus:outline-none focus:ring-2 focus:ring-[#E30613] focus:ring-offset-2
+                  ${formData.sterilise === "non" ? "max-md:bg-red-700" : "bg-[#E30613]"}`}
               >
                 Non
               </button>
