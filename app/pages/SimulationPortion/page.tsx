@@ -85,8 +85,8 @@ const Formulaire = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-[calc(100vh-6.5rem)] text-[#F8F9E9] bg-[#F8F9E9]">
-      <div className="bg-[#149A77] rounded-3xl p-24 shadow-lg relative w-[1000px] h-[500px] flex flex-col justify-center items-center overflow-hidden">
+    <div className="flex flex-col items-center md:justify-center h-[calc(100vh-6.5rem)] text-[#F8F9E9] bg-[#F8F9E9]">
+      <div className="bg-[#149A77] rounded-3xl p-24 shadow-lg relative w-[calc(100vw-2rem)] md:w-[1000px] h-[500px] flex flex-col justify-center items-center overflow-hidden">
         {/* Étape 1 */}
         {currentStep === 1 && (
           <>
@@ -102,22 +102,22 @@ const Formulaire = () => {
             </div>
 
             {/* Contenu principal */}
-            <div className="flex flex-col items-center justify-center relative z-10">
-              <h2 className="text-6xl font-bold mb-4 text-center">Quelques questions...</h2>
-              <label className="block text-3xl text-center my-12">Mon chien s&apos;appelle :</label>
+            <div className="flex flex-col items-center justify-center relative z-10 pb-8">
+              <h2 className="text-2xl md:text-6xl font-bold mb-4 text-center whitespace-nowrap">Quelques questions</h2>
+              <label className="block text-xl md:text-3xl text-center my-8 whitespace-nowrap">Mon chien s&apos;appelle :</label>
               <input
                 type="text"
                 name="nomChien"
                 value={formData.nomChien}
                 onChange={handleInputChange}
                 placeholder="Entrer son nom ici ..."
-                className="w-auto text-2xl p-2 rounded-3xl border-none focus:outline-none text-center text-[#004339]"
+                className="w-48 md:w-auto text-xl md:text-2xl p-1 md:p-2 rounded-3xl border-none focus:outline-none text-center text-[#004339]"
               />
               {errorMessage && <p className="text-[#E30613] mt-2">{errorMessage}</p>}
             </div>
             <button
               onClick={goToNextStep}
-              className="bg-[#B0D8C1] text-[#004339] font-bold py-2 px-4 rounded-3xl w-auto mt-4 absolute bottom-5 right-5 text-2xl"
+              className="bg-[#B0D8C1] text-[#004339] font-bold py-1 px-2 md:py-2 md:px-4 rounded-3xl w-auto mt-4 absolute bottom-5 right-5 text-xl md:text-2xl"
             >
               Suivant
             </button>
@@ -137,28 +137,28 @@ const Formulaire = () => {
               />
             </div>
 
-            <div className="flex flex-col items-center justify-center relative z-10">
-              <label className="block text-3xl text-center my-12">La race de mon chien :</label>
+            <div className="flex flex-col items-center justify-center relative z-10 pb-24">
+              <label className="block text-xl md:text-3xl text-center my-12 whitespace-nowrap">La race de mon chien :</label>
               <input
                 type="text"
                 name="race"
                 value={formData.race}
                 onChange={handleInputChange}
                 placeholder="Entrer sa race ici ..."
-                className="w-auto text-2xl p-2 rounded-3xl border-none focus:outline-none text-center text-[#004339]"
+                className="w-52 md:w-auto text-xl md:text-2xl p-1 md:p-2 rounded-3xl border-none focus:outline-none text-center text-[#004339]"
               />
               {errorMessage && currentStep === 2 && <p className="text-[#E30613] mt-2">{errorMessage}</p>}
             </div>
 
             <button
               onClick={goToPreviousStep}
-              className="bg-[#F8F9E9] text-[#004339] font-bold py-2 px-4 rounded-3xl w-auto absolute bottom-5 left-5 text-2xl"
+              className="bg-[#F8F9E9] text-[#004339] font-bold py-1 px-2 md:py-2 md:px-4 rounded-3xl w-auto absolute bottom-5 left-5 text-xl md:text-2xl"
             >
               Précédent
             </button>
             <button
               onClick={goToNextStep}
-              className="bg-[#B0D8C1] text-[#004339] font-bold py-2 px-4 rounded-3xl w-auto absolute bottom-5 right-5 text-2xl"
+              className="bg-[#B0D8C1] text-[#004339] font-bold py-1 px-2 md:py-2 md:px-4 rounded-3xl w-auto absolute bottom-5 right-5 text-xl md:text-2xl"
             >
               Suivant
             </button>
@@ -178,17 +178,17 @@ const Formulaire = () => {
               />
             </div>
 
-            <h2 className="text-3xl font-bold mb-4 text-center">Son sexe :</h2>
-            <div className="flex flex-col gap-3 text-2xl z-10">
+            <h2 className="text-xl md:text-3xl font-bold mb-4 text-center z-10 whitespace-nowrap">Son sexe :</h2>
+            <div className="flex flex-col gap-3 text-xl md:text-2xl z-10 pb-10">
               <button
                 onClick={() => setFormData((prev) => ({ ...prev, sexe: "mâle" }))}
-                className={`py-2 px-4 rounded-3xl font-bold bg-[#E30613] focus:outline-none focus:ring-2 focus:ring-[#E30613] focus:ring-offset-2`}
+                className={`py-1 px-2 md:py-2 md:px-4 rounded-3xl font-bold bg-[#E30613] focus:outline-none focus:ring-2 focus:ring-[#E30613] focus:ring-offset-2`}
               >
                 Mâle
               </button>
               <button
                 onClick={() => setFormData((prev) => ({ ...prev, sexe: "femelle" }))}
-                className={`py-2 px-4 rounded-3xl font-bold bg-[#E30613] focus:outline-none focus:ring-2 focus:ring-[#E30613] focus:ring-offset-2`}
+                className={`py-1 px-2 md:py-2 md:px-4 rounded-3xl font-bold bg-[#E30613] focus:outline-none focus:ring-2 focus:ring-[#E30613] focus:ring-offset-2`}
               >
                 Femelle
               </button>
@@ -196,13 +196,13 @@ const Formulaire = () => {
             {errorMessage && currentStep === 3 && <p className="text-[#E30613] mt-2">{errorMessage}</p>}
             <button
               onClick={goToPreviousStep}
-              className="bg-[#F8F9E9] text-[#004339] font-bold py-2 px-4 rounded-3xl w-auto absolute bottom-5 left-5 text-2xl"
+              className="bg-[#F8F9E9] text-[#004339] font-bold py-1 px-2 md:py-2 md:px-4 rounded-3xl w-auto absolute bottom-5 left-5 text-xl md:text-2xl"
             >
               Précédent
             </button>
             <button
               onClick={goToNextStep}
-              className="bg-[#B0D8C1] text-[#004339] font-bold py-2 px-4 rounded-3xl w-auto absolute bottom-5 right-5 text-2xl"
+              className="bg-[#B0D8C1] text-[#004339] font-bold py-1 px-2 md:py-2 md:px-4 rounded-3xl w-auto absolute bottom-5 right-5 text-xl md:text-2xl"
             >
               Suivant
             </button>
@@ -222,7 +222,7 @@ const Formulaire = () => {
               />
             </div>
             
-            <h2 className="text-3xl font-bold mb-4 text-center">Son poids :</h2>
+            <h2 className="text-xl md:text-3xl font-bold mb-4 text-center z-10 whitespace-nowrap">Son poids :</h2>
             <div className="flex justify-center items-center mb-6 z-10">
               <input
                 type="number"
@@ -230,20 +230,20 @@ const Formulaire = () => {
                 value={formData.poids}
                 onChange={handleInputChange}
                 placeholder="Entrer le poids (kg)"
-                className="text-center text-[#004339] py-2 px-4 rounded-3xl w-auto"
+                className="text-center text-[#004339] py-1 px-2 md:py-2 md:px-4 rounded-3xl w-40 md:w-auto"
               />
-              <span className="ml-2 text-3xl z-10">kg</span>
+              <span className="ml-2 text-xl md:text-3xl z-10">kg</span>
             </div>
             {errorMessage && currentStep === 4 && <p className="text-[#E30613] mt-2 text-center z-10">{errorMessage}</p>}
             <button
               onClick={goToPreviousStep}
-              className="bg-[#F8F9E9] text-[#004339] font-bold py-2 px-4 rounded-3xl w-auto absolute bottom-5 left-5 text-2xl"
+              className="bg-[#F8F9E9] text-[#004339] font-bold py-1 px-2 md:py-2 md:px-4 rounded-3xl w-auto absolute bottom-5 left-5 text-xl md:text-2xl"
             >
               Précédent
             </button>
             <button
               onClick={goToNextStep}
-              className="bg-[#B0D8C1] text-[#004339] font-bold py-2 px-4 rounded-3xl w-auto absolute bottom-5 right-5 text-2xl"
+              className="bg-[#B0D8C1] text-[#004339] font-bold py-1 px-2 md:py-2 md:px-4 rounded-3xl w-auto absolute bottom-5 right-5 text-xl md:text-2xl"
             >
               Suivant
             </button>
@@ -263,13 +263,13 @@ const Formulaire = () => {
               />
             </div>
 
-            <h2 className="text-3xl font-bold mb-4 text-center">Niveau d&apos;activité :</h2>
-            <div className="flex gap-3 text-2xl z-10">
+            <h2 className="text-xl md:text-3xl font-bold mb-4 text-center z-10 whitespace-nowrap">Niveau d&apos;activité :</h2>
+            <div className="flex flex-col md:flex-row gap-3 text-xl md:text-2xl z-10 pb-10">
               {["Canapé", "Actif", "Sportif"].map((level) => (
                 <button
                   key={level}
                   onClick={() => setFormData((prev) => ({ ...prev, activite: level }))}
-                  className={`py-2 px-4 rounded-3xl font-bold bg-[#E30613] focus:outline-none focus:ring-2 focus:ring-[#E30613] focus:ring-offset-2`}
+                  className={`py-1 px-2 md:py-2 md:px-4 rounded-3xl font-bold bg-[#E30613] focus:outline-none focus:ring-2 focus:ring-[#E30613] focus:ring-offset-2`}
                 >
                   {level}
                 </button>
@@ -278,13 +278,13 @@ const Formulaire = () => {
             {errorMessage && currentStep === 5 && <p className="text-[#E30613] mt-2">{errorMessage}</p>}
             <button
               onClick={goToPreviousStep}
-              className="bg-[#F8F9E9] text-[#004339] font-bold py-2 px-4 rounded-3xl w-auto absolute bottom-5 left-5 text-2xl"
+              className="bg-[#F8F9E9] text-[#004339] font-bold py-1 px-2 md:py-2 md:px-4 rounded-3xl w-auto absolute bottom-5 left-5 text-xl md:text-2xl"
             >
               Précédent
             </button>
             <button
               onClick={goToNextStep}
-              className="bg-[#B0D8C1] text-[#004339] font-bold py-2 px-4 rounded-3xl w-auto absolute bottom-5 right-5 text-2xl"
+              className="bg-[#B0D8C1] text-[#004339] font-bold py-1 px-2 md:py-2 md:px-4 rounded-3xl w-auto absolute bottom-5 right-5 text-xl md:text-2xl"
             >
               Suivant
             </button>
@@ -304,13 +304,13 @@ const Formulaire = () => {
               />
             </div>
 
-            <h2 className="text-3xl font-bold mb-4 text-center">Corpulence :</h2>
-            <div className="flex gap-3 text-2xl z-10">
+            <h2 className="text-xl md:text-3xl font-bold mb-4 text-center z-10 whitespace-nowrap">Corpulence :</h2>
+            <div className="flex flex-col md:flex-row gap-3 text-xl md:text-2xl z-10">
               {["Maigre", "Normal", "Surpoids"].map((type) => (
                 <button
                   key={type}
                   onClick={() => setFormData((prev) => ({ ...prev, corpulence: type }))}
-                  className={`py-2 px-4 rounded-3xl font-bold bg-[#E30613] focus:outline-none focus:ring-2 focus:ring-[#E30613] focus:ring-offset-2`}
+                  className={`py-1 px-2 md:py-2 md:px-4 rounded-3xl font-bold bg-[#E30613] focus:outline-none focus:ring-2 focus:ring-[#E30613] focus:ring-offset-2`}
                 >
                   {type}
                 </button>
@@ -319,13 +319,13 @@ const Formulaire = () => {
             {errorMessage && currentStep === 6 && <p className="text-[#E30613] mt-2">{errorMessage}</p>}
             <button
               onClick={goToPreviousStep}
-              className="bg-[#F8F9E9] text-[#004339] font-bold py-2 px-4 rounded-3xl w-auto absolute bottom-5 left-5 text-2xl"
+              className="bg-[#F8F9E9] text-[#004339] font-bold py-1 px-2 md:py-2 md:px-4 rounded-3xl w-auto absolute bottom-5 left-5 text-xl md:text-2xl"
             >
               Précédent
             </button>
             <button
               onClick={goToNextStep}
-              className="bg-[#B0D8C1] text-[#004339] font-bold py-2 px-4 rounded-3xl w-auto absolute bottom-5 right-5 text-2xl"
+              className="bg-[#B0D8C1] text-[#004339] font-bold py-1 px-2 md:py-2 md:px-4 rounded-3xl w-auto absolute bottom-5 right-5 text-xl md:text-2xl"
             >
               Suivant
             </button>
@@ -345,17 +345,17 @@ const Formulaire = () => {
               />
             </div>
 
-            <h2 className="text-3xl font-bold mb-4 text-center z-10">Votre chien est-il stérilisé ?</h2>
-            <div className="flex gap-3 text-2xl z-10">
+            <h2 className="text-xl md:text-3xl font-bold mb-4 text-center z-10 whitespace-nowrap">Votre chien est-il stérilisé ?</h2>
+            <div className="flex gap-3 text-xl md:text-2xl z-10">
               <button
                 onClick={() => setFormData((prev) => ({ ...prev, sterilise: "oui" }))}
-                className={`py-2 px-4 rounded-3xl font-bold bg-[#E30613] focus:outline-none focus:ring-2 focus:ring-[#E30613] focus:ring-offset-2`}
+                className={`py-1 px-2 md:py-2 md:px-4 rounded-3xl font-bold bg-[#E30613] focus:outline-none focus:ring-2 focus:ring-[#E30613] focus:ring-offset-2`}
               >
                 Oui
               </button>
               <button
                 onClick={() => setFormData((prev) => ({ ...prev, sterilise: "non" }))}
-                className={`py-2 px-4 rounded-3xl font-bold bg-[#E30613] focus:outline-none focus:ring-2 focus:ring-[#E30613] focus:ring-offset-2`}
+                className={`py-1 px-2 md:py-2 md:px-4 rounded-3xl font-bold bg-[#E30613] focus:outline-none focus:ring-2 focus:ring-[#E30613] focus:ring-offset-2`}
               >
                 Non
               </button>
@@ -363,13 +363,13 @@ const Formulaire = () => {
             {errorMessage && currentStep === 7 && <p className="text-[#E30613] mt-2">{errorMessage}</p>}
             <button
               onClick={goToPreviousStep}
-              className="bg-[#F8F9E9] text-[#004339] font-bold py-2 px-4 rounded-3xl w-auto absolute bottom-5 left-5 text-2xl"
+              className="bg-[#F8F9E9] text-[#004339] font-bold py-1 px-2 md:py-2 md:px-4 rounded-3xl w-auto absolute bottom-5 left-5 text-xl md:text-2xl"
             >
               Précédent
             </button>
             <button
               onClick={goToNextStep}
-              className="bg-[#B0D8C1] text-[#004339] font-bold py-2 px-4 rounded-3xl w-auto absolute bottom-5 right-5 text-2xl"
+              className="bg-[#B0D8C1] text-[#004339] font-bold py-1 px-2 md:py-2 md:px-4 rounded-3xl w-auto absolute bottom-5 right-5 text-xl md:text-2xl"
             >
               Suivant
             </button>
@@ -379,17 +379,17 @@ const Formulaire = () => {
         {/* Étape 8 */}
         {currentStep === 8 && (
           <>
-            <h2 className="text-3xl font-bold mb-4 text-center">Résumé des informations :</h2>
-            <ul className="bg-[#B0D8C1] p-5 rounded-3xl mb-6">
+            <h2 className="text-xl md:text-3xl font-bold mb-4 text-center whitespace-nowrap">Résumé des informations :</h2>
+            <ul className="bg-[#B0D8C1] p-5 rounded-3xl mb-16 w-[280px] md:w-[350px]">
               {Object.entries(formData).map(([key, value]) => (
-                <li key={key} className="text-2xl mb-2">
+                <li key={key} className="text-xl md:text-2xl mb-2">
                   <strong className="text-[#004339]">{key} :</strong> <span className="text-[#149A77]">{value || "Non renseigné"}</span>
                 </li>
               ))}
             </ul>
             <button
               onClick={goToPreviousStep}
-              className="bg-[#F8F9E9] text-[#004339] font-bold py-2 px-4 rounded-3xl w-auto absolute bottom-5 left-5 text-2xl"
+              className="bg-[#F8F9E9] text-[#004339] font-bold py-1 px-2 md:py-2 md:px-4 rounded-3xl w-auto absolute bottom-5 left-5 text-xl md:text-2xl"
             >
               Précédent
             </button>
@@ -419,7 +419,7 @@ const Formulaire = () => {
               }}
             >
               <button
-                className="bg-[#E30613] text-[#F8F9E9] font-bold py-2 px-4 rounded-3xl w-auto absolute bottom-5 right-5 text-2xl"
+                className="bg-[#E30613] text-[#F8F9E9] font-bold py-1 px-2 md:py-2 md:px-4 rounded-3xl w-auto absolute bottom-5 right-5 text-xl md:text-2xl"
               >
                 Confirmer
               </button>
@@ -431,7 +431,7 @@ const Formulaire = () => {
         {/* Barre de progression */}
         <div className="mt-4">
         <p className="text-[#149A77] text-center text-xl mb-3">{currentStep === 8 ? "Simulation terminé" : `${8 - currentStep} questions restantes`}</p>
-          <div className="border-2 border-[#149A77] h-4 rounded-full overflow-hidden w-96">
+          <div className="border-2 border-[#149A77] h-4 rounded-full overflow-hidden w-[calc(100vw-3rem)] md:w-96">
             <div
               className="bg-[#004339] h-full"
               style={{ width: `${(currentStep / 8) * 100}%` }}
