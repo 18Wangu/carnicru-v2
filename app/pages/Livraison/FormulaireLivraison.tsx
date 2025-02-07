@@ -151,8 +151,8 @@ const FormulaireLivraison = () => {
   return (
     <div>
       {/*<CodePromo />*/}
-      <div className='flex flex-col justify-center items-center h-[calc(100vh-9rem)] relative'>
-        <div>
+      <div className='flex flex-col justify-center items-center md:h-[calc(100vh-9rem)] relative'>
+        <div className='w-[300px] text-center md:w-[700px]'>
           <h1 className='text-4xl mb-5 text-[#004339]'>Formulaire de livraison</h1>
           <form onSubmit={(e) => e.preventDefault()}>
             {[
@@ -194,7 +194,7 @@ const FormulaireLivraison = () => {
                       return newErrors;
                     });
                   }}                  
-                  className={`text-[#009874] text-xl bg-[#B0D8C1] placeholder:text-[#009874] placeholder:opacity-75 rounded-xl w-[700px] h-12 pl-4 my-2 focus:outline-none focus:ring-2 focus:ring-[#009874] ${montserratFont.className}`}
+                  className={`text-[#009874] text-xl bg-[#B0D8C1] placeholder:text-[#009874] placeholder:opacity-75 rounded-xl md:w-[700px] h-12 pl-4 my-2 focus:outline-none focus:ring-2 focus:ring-[#009874] ${montserratFont.className}`}
                 />
                 {errors[field] && <p className="text-red-600 text-sm">{errors[field]}</p>}
               </div>
@@ -222,7 +222,7 @@ const FormulaireLivraison = () => {
             alt='camion livraison viande carnicru'
             width={200}
             height={200}
-            className="absolute bottom-5 right-48"
+            className="absolute bottom-5 right-48 hidden md:block"
           />
         </div>
 
