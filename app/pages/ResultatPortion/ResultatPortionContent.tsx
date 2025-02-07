@@ -32,8 +32,15 @@ const ResultatPortionContent: React.FC = () => {
   ];
 
   const renderPlanCard = (title: string, price: string, imageSrc: string) => (
-    <div className="flex gap-10 my-auto md:w-[351px]">
+    <div className="flex gap-10 my-auto md:w-[351px] relative">
       <div className="flex flex-col items-center h-[480px] md:w-[351px]">
+        {/* Ajout de la pastille -5% pour la formule mensuelle */}
+        {title === "Formule mensuelle" && (
+          <div className="absolute bottom-[170px] right-10 z-10 md:right-0 bg-[#B9110F] text-white text-xl font-normal px-3 py-1 rounded-tl-2xl">
+            - 5%
+          </div>
+        )}
+        
         <div className="gap-10 text-[#004339]">{title}</div>
         <div className="flex overflow-hidden flex-col mt-5 rounded-2xl w-[351px] relative">
           <div className="flex relative flex-col items-start pt-40 w-full rounded-2xl aspect-[1.245] max-md:pt-24 max-md:pr-5">
@@ -45,7 +52,7 @@ const ResultatPortionContent: React.FC = () => {
               height={440}
               className="object-cover absolute inset-0 size-full"
             />
-            <div className="flex overflow-hidden absolute bottom-5 left-10 md:left-0 items-center p-3 md:p-5 bg-[#149A77] rounded-2xl">
+            <div className="flex overflow-hidden absolute bottom-5 left-10 md:left-0 font-normal items-center p-3 md:p-5 bg-[#149A77] rounded-2xl">
               <div className="gap-10 self-stretch my-auto">{price}</div>
             </div>
           </div>
@@ -60,15 +67,15 @@ const ResultatPortionContent: React.FC = () => {
         >
           Choisir
         </Link>
-        <div className="text-sm text-center text-[#004339] mt-2 w-full px-4 md:whitespace-nowrap">
-          <em>dont 20€ de livraison déjà inclus dans le prix</em>
+        <div className="text-sm text-center text-[#004339] mt-2 w-full">
+          <em>dont 20€ de livraison déjà inclus < br/> dans le prix</em>
         </div>
-
+  
         <div className="flex gap-10 mt-5 min-h-[0px]" />
       </div>
     </div>
   );
-
+  
   return (
     <div>
       <div className="flex flex-col items-center font-semibold my-20">
